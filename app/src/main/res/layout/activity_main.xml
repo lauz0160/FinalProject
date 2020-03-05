@@ -1,18 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="CST 2335 Final Project"
+        android:textSize="30sp"
+        android:textAlignment="center"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Person 1"
+        android:layout_weight="1"
+        android:gravity="bottom"/>
+
+    <Button
+        android:id="@+id/btnGuardian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardian News Article Search"
+        android:textSize="20sp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PErson 2"
+        android:layout_weight="1"
+        android:gravity="bottom"/>
+
+    <Button
+        android:id="@+id/btnImageOfDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NASA Image of the Day"
+        android:textSize="20sp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Person 3"
+        android:layout_weight="1"
+        android:gravity="bottom"/>
+
+    <Button
+        android:id="@+id/btnEarthImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NASA Earth Imagery database"
+        android:textSize="20sp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Person 4"
+        android:layout_weight="1"
+        android:gravity="bottom"/>
+
+    <Button
+        android:id="@+id/btnBBC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BBC News Reader"
+        android:textSize="20sp"
+        android:layout_weight="1"/>
+
+</LinearLayout>
