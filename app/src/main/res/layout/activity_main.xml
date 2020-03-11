@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="15dp"
     tools:context=".MainActivity">
+
 
     <TextView
         android:layout_width="match_parent"
@@ -16,8 +18,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Person 1"
-        android:layout_weight="1"
+        android:text="Dan Brown"
+        android:layout_weight="1.5"
         android:gravity="bottom"/>
 
     <Button
@@ -25,14 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardian News Article Search"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_weight="1"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PErson 2"
-        android:layout_weight="1"
+        android:text="Dan Dwyer"
+        android:layout_weight="1.5"
         android:gravity="bottom"/>
 
     <Button
@@ -40,14 +42,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="NASA Image of the Day"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_weight="1"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Person 3"
-        android:layout_weight="1"
+        android:text="Karen Lauzon"
+        android:layout_weight="1.5"
         android:gravity="bottom"/>
 
     <Button
@@ -55,14 +57,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="NASA Earth Imagery database"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_weight="1"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Person 4"
-        android:layout_weight="1"
+        android:text="Alex Griffith"
+        android:layout_weight="1.5"
         android:gravity="bottom"/>
 
     <Button
@@ -70,7 +72,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="BBC News Reader"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_weight="1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"/>
+
+
 
 </LinearLayout>

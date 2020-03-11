@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
       //  btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
 
         Button btnEarth = findViewById(R.id.btnEarthImage);
-     //   btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnEarth.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, NASA_Earth_Imagery.class)));
 
         Button btnBBC = findViewById(R.id.btnBBC);
      //   btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
