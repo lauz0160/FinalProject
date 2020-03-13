@@ -4,76 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="15dp"
     tools:context=".Earth_search">
 
-    <TextView
-        android:id="@+id/searchMessage"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:text="Enter Longitude and Latitude to search an image"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"/>
+        android:background="@color/colorPrimary"
+        app:titleTextColor="#FFFFFF" />
 
-    <TextView
-        android:id="@+id/textEnterLat"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/searchMessage"
-        android:text="Enter Latitude: "/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/my_toolbar"
+        tools:openDrawer="start">
 
-    <EditText
-        android:id="@+id/editLatitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/textEnterLat"
-        android:hint="Latitude"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp">
 
-    <TextView
-        android:id="@+id/textEnterLong"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/editLatitude"
-        android:text="Enter Longitude"/>
+            <TextView
+                android:id="@+id/searchMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="10dp"
+                android:text="@string/search_prompt"
+                android:textAlignment="center"
+                android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/editLong"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/textEnterLong"
-        android:hint="Longitude"/>
+            <TextView
+                android:id="@+id/textEnterLat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/searchMessage"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:text="@string/enter_latitude" />
 
-    <Button
-        android:id="@+id/btnSearchDatabase"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/editLong"
-        android:layout_margin="20dp"
-        android:text="Search"/>
+            <EditText
+                android:id="@+id/editLatitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textEnterLat"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/latitude" />
 
-    <Button
-        android:id="@+id/btnLastSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/btnSearchDatabase"
-        android:layout_margin="20dp"
-        android:text="See Last Search"/>
+            <TextView
+                android:id="@+id/textEnterLong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editLatitude"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:text="@string/enter_longitude" />
 
+            <EditText
+                android:id="@+id/editLong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textEnterLong"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/longitude"/>
 
+            <Button
+                android:id="@+id/btnSearchDatabase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editLong"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="20dp"
+                android:text="@string/search" />
+
+            <Button
+                android:id="@+id/btnLastSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnSearchDatabase"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="20dp"
+                android:text="@string/see_last_search" />
+        </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/drawer" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>

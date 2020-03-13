@@ -1,84 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="15dp"
     tools:context=".MainActivity">
 
-
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CST 2335 Final Project"
-        android:textSize="30sp"
-        android:textAlignment="center"/>
+        android:background="@color/colorPrimary"
+        app:title="CST 2335 Final Project"
+        app:titleTextColor="#FFFFFF" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dan Brown"
-        android:layout_weight="1.5"
-        android:gravity="bottom"/>
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnGuardian"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Guardian News Article Search"
-        android:textSize="15sp"
-        android:layout_weight="1"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cst_2335_final_project"
+            android:textAlignment="center"
+            android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dan Dwyer"
-        android:layout_weight="1.5"
-        android:gravity="bottom"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="bottom"
+            android:text="@string/dan_brown" />
 
-    <Button
-        android:id="@+id/btnImageOfDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NASA Image of the Day"
-        android:textSize="15sp"
-        android:layout_weight="1"/>
+        <Button
+            android:id="@+id/btnGuardian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/guardian_news_article_search"
+            android:textSize="15sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Karen Lauzon"
-        android:layout_weight="1.5"
-        android:gravity="bottom"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="bottom"
+            android:text="@string/dan_dwyer" />
 
-    <Button
-        android:id="@+id/btnEarthImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NASA Earth Imagery database"
-        android:textSize="15sp"
-        android:layout_weight="1"/>
+        <Button
+            android:id="@+id/btnImageOfDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/nasa_image_of_the_day"
+            android:textSize="15sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Alex Griffith"
-        android:layout_weight="1.5"
-        android:gravity="bottom"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="bottom"
+            android:text="@string/karen_lauzon" />
 
-    <Button
-        android:id="@+id/btnBBC"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="BBC News Reader"
-        android:textSize="15sp"
-        android:layout_weight="1"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.5"/>
+        <Button
+            android:id="@+id/btnEarthImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/nasa_earth_imagery_database"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="bottom"
+            android:text="@string/alex_griffith" />
+
+        <Button
+            android:id="@+id/btnBBC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bbc_news_reader"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5" />
 
 
-
+    </LinearLayout>
 </LinearLayout>

@@ -1,12 +1,8 @@
 package com.example.finalproject;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,6 +11,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,16 +21,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Earth_Favorites extends AppCompatActivity {
+public class Earth_Favorites extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     String date;
     String lat;
@@ -44,7 +48,7 @@ public class Earth_Favorites extends AppCompatActivity {
 
     final static String DATABASE_NAME = "imagesDB";
     final static String TABLE_NAME = "Images";
-    final static String COL_Date= "Date";
+    final static String COL_Date = "Date";
     final static String COL_Longitude = "Longitude";
     final static String COL_Latitude = "Latitude";
     final static String COL_Image = "ImageUrl";
@@ -57,6 +61,17 @@ public class Earth_Favorites extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_earth__favorites);
 
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setItemIconTintList(null);
+        navigationView.setNavigationItemSelectedListener(this);
 
         loadDataFromDatabase();
         ListView myList = findViewById(R.id.listOfImages);
@@ -64,41 +79,39 @@ public class Earth_Favorites extends AppCompatActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         Intent data = getIntent();
-        if(data.hasExtra("image")){
+        if (data.hasExtra("image")) {
             imageUrl = data.getStringExtra("image");
             date = data.getStringExtra("date");
             lon = data.getStringExtra("lon");
             lat = data.getStringExtra("lat");
 
             ContentValues newRow = new ContentValues();
-            newRow.put(COL_Date,date);
-            newRow.put(COL_Image,imageUrl);
-            newRow.put(COL_Latitude,lat);
-            newRow.put(COL_Longitude,lon);
+            newRow.put(COL_Date, date);
+            newRow.put(COL_Image, imageUrl);
+            newRow.put(COL_Latitude, lat);
+            newRow.put(COL_Longitude, lon);
 
             long newID = db.insert(TABLE_NAME, null, newRow);
-            imagesList.add(new AnImage(newID, date,imageUrl,lat, lon));
+            imagesList.add(new AnImage(newID, date, imageUrl, lat, lon));
             Toast.makeText(this, "Image has been Saved", Toast.LENGTH_LONG).show();
         }
 
+        if (data.hasExtra("position")) {
+            db.delete(TABLE_NAME, COL_ID + "= ?", new String[]{Long.toString(imagesList.get(data.getIntExtra("position",0)).getId())});
+            imagesList.remove(data.getIntExtra("position",0));
+            myAdapter.notifyDataSetChanged();
+        }
+
         myList.setOnItemLongClickListener((parent, view, position, id) -> {
-            alertDialogBuilder.setTitle("Remove this item from favorites?");
-            //alertDialogBuilder.setView(view.);
-            alertDialogBuilder.setMessage("Date: "+date+"\nLatitude: "+lat+"\nLongitude: "+lon);
-            alertDialogBuilder.setPositiveButton("Yes", (click, arg) -> {
-                db.delete(TABLE_NAME, COL_ID + "= ?", new String[]{Long.toString(imagesList.get(position).getId())});
-                imagesList.remove(position);
-                try {
-                    deleteFile(imageUrl);
-                }catch(Exception e){
-                    Log.e(e.getMessage(),"");
-                }
-                myAdapter.notifyDataSetChanged();
-                Toast.makeText(this, "Image has been deleted", Toast.LENGTH_LONG).show();
-            });
-            alertDialogBuilder.setNegativeButton("No", (click, arg) -> {
-            });
-            alertDialogBuilder.create().show();
+            Bundle dataToPass = new Bundle();
+            dataToPass.putString("date", imagesList.get(position).getDate());
+            dataToPass.putString("file", imageUrl);
+            dataToPass.putString("coordinates", imagesList.get(position).getLat() + ", " + imagesList.get(position).getLon());
+            dataToPass.putInt("position", position);
+
+            Intent next = new Intent(Earth_Favorites.this, Phone_fragment.class);
+            next.putExtras(dataToPass);
+            startActivity(next);
 
             return true;
         });
@@ -116,10 +129,9 @@ public class Earth_Favorites extends AppCompatActivity {
         private String lon;
 
 
-
         private long id;
 
-        private AnImage (long id,String d, String i, String la, String lo ){
+        private AnImage(long id, String d, String i, String la, String lo) {
             setId(id);
             setDate(d);
             setImageUrl(i);
@@ -135,42 +147,38 @@ public class Earth_Favorites extends AppCompatActivity {
             this.id = id;
         }
 
-        public String getImageUrl() {
+        String getImageUrl() {
             return imageUrl;
         }
 
-        public void setImageUrl(String imageUrl) {
+        void setImageUrl(String imageUrl) {
             this.imageUrl = imageUrl;
         }
 
-        public String getDate() {
+        String getDate() {
             return date;
         }
 
-        public void setDate(String date) {
+        void setDate(String date) {
             this.date = date;
         }
 
-        public String getLat() {
+        String getLat() {
             return lat;
         }
 
-        public void setLat(String lat) {
+        void setLat(String lat) {
             this.lat = lat;
         }
 
-        public String getLon() {
+        String getLon() {
             return lon;
         }
 
-        public void setLon(String lon) {
+        void setLon(String lon) {
             this.lon = lon;
         }
     }
-
-
-
-
 
 
     private class MyListAdapter extends BaseAdapter {
@@ -179,7 +187,9 @@ public class Earth_Favorites extends AppCompatActivity {
             return imagesList.size();
         }
 
-        public AnImage getItem(int position) {return imagesList.get(position); }
+        public AnImage getItem(int position) {
+            return imagesList.get(position);
+        }
 
         public long getItemId(int position) {
             return getItem(position).getId();
@@ -196,43 +206,43 @@ public class Earth_Favorites extends AppCompatActivity {
             ImageView image = old.findViewById(R.id.imageLayoutImage);
 
             FileInputStream fis = null;
-            try {    fis = openFileInput(anImage.getImageUrl());   }
-            catch (FileNotFoundException e) {    e.printStackTrace();  }
+            try {
+                fis = openFileInput(anImage.getImageUrl());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             Bitmap pic = BitmapFactory.decodeStream(fis);
 
             image.setImageBitmap(pic);
 
-            lat.setText( "Latitude:     "+anImage.getLat());
-            lon.setText( "Longitude:  "+anImage.getLon());
-            date.setText("Date:           "+anImage.getDate());
+            lat.setText("Latitude:     " + anImage.getLat());
+            lon.setText("Longitude:  " + anImage.getLon());
+            date.setText("Date:           " + anImage.getDate());
             return old;
         }
     }
 
 
-
-
-
-
     private class MyOpener extends SQLiteOpenHelper {
 
 
-        public MyOpener(Context ctx){ super(ctx, DATABASE_NAME, null, VERSION_NUM); }
+        MyOpener(Context ctx) {
+            super(ctx, DATABASE_NAME, null, VERSION_NUM);
+        }
 
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE " + TABLE_NAME +
                     " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COL_Date + " text,"
-                    + COL_Image  + " text,"
-                    +COL_Latitude + " text,"
-                    +COL_Longitude + " text);");
+                    + COL_Image + " text,"
+                    + COL_Latitude + " text,"
+                    + COL_Longitude + " text);");
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-        {   //Drop the old table:
-            db.execSQL( "DROP TABLE IF EXISTS " + TABLE_NAME);
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {   //Drop the old table:
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 
             //Create the new table:
             onCreate(db);
@@ -240,16 +250,12 @@ public class Earth_Favorites extends AppCompatActivity {
     }
 
 
-
-
-
-    private void loadDataFromDatabase()
-    {
+    private void loadDataFromDatabase() {
         MyOpener dbOpener = new MyOpener(this);
         db = dbOpener.getWritableDatabase();
 
-        String [] columns = {COL_ID, COL_Date, COL_Image, COL_Latitude, COL_Longitude};
-        Cursor results = db.query(false,TABLE_NAME, columns, null, null, null, null, null, null);
+        String[] columns = {COL_ID, COL_Date, COL_Image, COL_Latitude, COL_Longitude};
+        Cursor results = db.query(false, TABLE_NAME, columns, null, null, null, null, null, null);
 
         int DateColumnIndex = results.getColumnIndex(COL_Date);
         int ImageColIndex = results.getColumnIndex(COL_Image);
@@ -257,13 +263,71 @@ public class Earth_Favorites extends AppCompatActivity {
         int LonColIndex = results.getColumnIndex(COL_Longitude);
         int idColIndex = results.getColumnIndex(COL_ID);
 
-        while(results.moveToNext()) {
+        while (results.moveToNext()) {
             long id = results.getLong(idColIndex);
             String date = results.getString(DateColumnIndex);
-            String image =results.getString(ImageColIndex);
+            String image = results.getString(ImageColIndex);
             String lat = results.getString(LatColIndex);
             String lon = results.getString(LonColIndex);
             imagesList.add(new AnImage(id, date, image, lat, lon));
         }
+        results.close();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Class activity = MainActivity.class;
+        switch (item.getItemId()) {
+            case R.id.FavIcon:
+                activity = Earth_Favorites.class;
+                break;
+            case R.id.SearchIcon:
+                activity = Earth_search.class;
+                break;
+            case R.id.HomeIcon:
+                activity = NASA_Earth_Imagery.class;
+                break;
+        }
+        startActivity(new Intent(Earth_Favorites.this, activity));
+        return true;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.guardianIcon:
+
+                break;
+            case R.id.nasaImageIcon:
+
+                break;
+            case R.id.nasaEarthIcon:
+                startActivity(new Intent(Earth_Favorites.this, NASA_Earth_Imagery.class));
+                break;
+            case R.id.bbcNewsIcon:
+
+                break;
+            case R.id.helpIcon:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Favorites Help");
+                alertDialogBuilder.setMessage("This screen displays a list of images that have been saved. " +
+                        "\n\nClick on on of the items in the list to get details about that image or to remove it from the list" +
+                        "\n\nThe toolbar along the top of the screen will take you to any of the three main screens of this activity: the home screen, the search screen, and the list of favorites" +
+                        "\n\nThe icons in the navigation menu along the side of the screen can take you to any of the other activities in this application");
+                alertDialogBuilder.setPositiveButton("Yes", (click, arg) -> {
+
+                });
+                alertDialogBuilder.create().show();
+                break;
+        }
+
+        return false;
     }
 }

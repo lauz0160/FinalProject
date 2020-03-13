@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,40 +8,41 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_alignParentStart="true"
-        android:src="@drawable/thumb"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:contentDescription="@string/nasa_images"
+        android:src="@drawable/thumb" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_alignBottom="@id/imageLayoutImage"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@id/imageLayoutImage"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@id/imageLayoutImage"
-        android:layout_margin="10dp">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:id="@+id/imageLayoutDate"
-            android:text="Date goes here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="20dp"/>
+            android:text="@string/date_goes_here"
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:id="@+id/imageLayoutLat"
-            android:text="Latitude goes here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="20dp"/>
+            android:text="@string/latitude_goes_here"
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:id="@+id/imageLayoutLong"
-            android:text="Longitude goes here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="20dp"/>
+            android:text="@string/longitude_goes_here"
+            android:textSize="20sp" />
     </LinearLayout>
 </RelativeLayout>

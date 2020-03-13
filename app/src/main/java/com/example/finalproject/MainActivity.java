@@ -13,18 +13,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Button btnImage = findViewById(R.id.btnImageOfDay);
-      //  btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        //  btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
 
         Button btnGuardian = findViewById(R.id.btnGuardian);
-      //  btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        //  btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
 
         Button btnEarth = findViewById(R.id.btnEarthImage);
         btnEarth.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, NASA_Earth_Imagery.class)));
 
         Button btnBBC = findViewById(R.id.btnBBC);
-     //   btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        //   btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
 
     }
+
 }
