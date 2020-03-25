@@ -31,7 +31,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PErson 2"
+        android:text="Person 2"
         android:layout_weight="1"
         android:gravity="bottom"/>
 
@@ -61,7 +61,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Person 4"
+        android:text="Alex Griffith"
         android:layout_weight="1"
         android:gravity="bottom"/>
 

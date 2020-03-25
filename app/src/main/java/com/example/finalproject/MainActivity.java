@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
      //   btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
 
         Button btnBBC = findViewById(R.id.btnBBC);
-     //   btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnBBC.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, BbcNewsReader.class)));
 
     }
 }
