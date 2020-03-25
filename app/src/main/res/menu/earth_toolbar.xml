@@ -7,21 +7,21 @@
         android:id="@+id/HomeIcon"
         android:icon="@drawable/ic_menu_home"
         android:orderInCategory="100"
-        android:title="Return to home screen"
-        app:showAsAction="always" />
+        android:title="@string/return_to_home_screen"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/SearchIcon"
         android:icon="@android:drawable/ic_menu_search"
-        android:orderInCategory="100"
-        android:title="Search New Location"
-        app:showAsAction="always" />
+        android:orderInCategory="200"
+        android:title="@string/search_new_location"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/FavIcon"
         android:icon="@android:drawable/btn_star"
-        android:orderInCategory="100"
-        android:title="Save to Favorites"
-        app:showAsAction="always" />
+        android:orderInCategory="300"
+        android:title="@string/save_to_favorites"
+        app:showAsAction="ifRoom" />
 
 </menu>

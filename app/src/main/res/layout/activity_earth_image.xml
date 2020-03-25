@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Earth_image">
+    tools:context=".Earth_Image">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -35,7 +35,6 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/dateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imageName"
@@ -134,7 +133,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:headerLayout="@layout/nav_header"
-            app:menu="@menu/drawer" />
+            app:headerLayout="@layout/earth_nav_header"
+            app:menu="@menu/earth_drawer" />
+
     </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>

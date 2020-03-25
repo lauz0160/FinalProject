@@ -3,28 +3,27 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="earthImageDetails">Image Details:</string>
-    <string name="earthImageDate">Date of image:</string>
     <string name="earthImageLat">Latitude:</string>
     <string name="earthImageLong">Longitude:</string>
-    <string name="zero">0</string>
+    <string name="zero" translatable="false">0</string>
     <string name="back_to_search">Back to Search</string>
     <string name="save_to_favorites">Save to Favorites</string>
     <string name="nasa_images">NASA Images</string>
     <string name="search_prompt">Enter Longitude and Latitude to search an image</string>
     <string name="enter_latitude">Enter Latitude:</string>
-    <string name="latitude">Latitude</string>
+    <string name="latitude" translatable="false">Latitude</string>
     <string name="enter_longitude">Enter Longitude</string>
-    <string name="longitude">Longitude</string>
+    <string name="longitude" translatable="false">Longitude</string>
     <string name="search">Search</string>
     <string name="see_last_search">See Last Search</string>
     <string name="cst_2335_final_project">CST 2335 Final Project</string>
-    <string name="dan_brown">Dan Brown</string>
+    <string name="dan_brown" translatable="false">Dan Brown</string>
     <string name="guardian_news_article_search">Guardian News Article Search</string>
-    <string name="dan_dwyer">Dan Dwyer</string>
+    <string name="dan_dwyer" translatable="false">Dan Dwyer</string>
     <string name="nasa_image_of_the_day">NASA Image of the Day</string>
-    <string name="karen_lauzon">Karen Lauzon</string>
+    <string name="karen_lauzon" translatable="false">Karen Lauzon</string>
     <string name="nasa_earth_imagery_database">NASA Earth Imagery database</string>
-    <string name="alex_griffith">Alex Griffith</string>
+    <string name="alex_griffith" translatable="false">Alex Griffith</string>
     <string name="bbc_news_reader">BBC News Reader</string>
     <string name="welcome_to_the_nasa_earth_imagery_database">Welcome to the NASA Earth Imagery Database</string>
     <string name="new_search">New Search</string>
@@ -35,13 +34,11 @@
     <string name="bbc_news">BBC News</string>
     <string name="help_message">Confused how this app works?</string>
     <string name="help">Help</string>
-    <string name="search_new_location">Search New Location</string>
     <string name="nasa_earth_image_search">NASA Earth Image Search</string>
-    <string name="version">Version 3</string>
-    <string name="date_goes_here">Date goes here</string>
-    <string name="latitude_goes_here">Latitude goes here</string>
-    <string name="longitude_goes_here">Longitude goes here</string>
+    <string name="version" translatable="false">Version 4</string>
     <string name="hide">HIDE</string>
     <string name="delete_image">Delete Image</string>
-    <string name="date">Date:</string>
+    <string name="date" translatable="false">Date:</string>
+    <string name="search_new_location">Search New Location</string>
+    <string name="return_to_home_screen">Return to home screen</string>
 </resources>

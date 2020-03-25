@@ -1,11 +1,15 @@
 package com.example.finalproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+/**
+ * Launcher activity for the Final Project application
+ * {@link AppCompatActivity} subclass.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -13,17 +17,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //button that triggers the NASA image of the day activity
         Button btnImage = findViewById(R.id.btnImageOfDay);
-        //  btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
 
+        //button that triggers the Guardians news article search activity
         Button btnGuardian = findViewById(R.id.btnGuardian);
-        //  btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
 
+        //button that triggers the NASA earth image search
         Button btnEarth = findViewById(R.id.btnEarthImage);
-        btnEarth.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, NASA_Earth_Imagery.class)));
+        btnEarth.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, Earth_Main.class)));
 
+        //button that triggers the BBC news article search
         Button btnBBC = findViewById(R.id.btnBBC);
-        //   btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
 
     }
 

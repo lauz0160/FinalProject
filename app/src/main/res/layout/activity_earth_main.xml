@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NASA_Earth_Imagery">
+    tools:context=".Earth_Main">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -72,7 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:headerLayout="@layout/nav_header"
-            app:menu="@menu/drawer" />
+            app:headerLayout="@layout/earth_nav_header"
+            app:menu="@menu/earth_drawer" />
+
     </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>

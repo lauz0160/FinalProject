@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Project Final</string>
+    <string name="open">Ouvrir</string>
+    <string name="close">Fermer</string>
+    <string name="earthImageDetails">Détail de l\'image:</string>
+    <string name="earthImageLat">Latitude:</string>
+    <string name="earthImageLong">Longitude:</string>
+    <string name="back_to_search">returner</string>
+    <string name="save_to_favorites">garde l\'image</string>
+    <string name="nasa_images">Image NASA</string>
+    <string name="search_prompt">Entrer Latitude et Longitude pour chercher un image</string>
+    <string name="enter_latitude">Latitude:</string>
+    <string name="enter_longitude">Longitude:</string>
+    <string name="search">Rechercher</string>
+    <string name="see_last_search">Dernier image</string>
+    <string name="cst_2335_final_project">CST 2335 Projet Finale</string>
+    <string name="guardian_news_article_search">recherche d\'un post Guardian</string>
+    <string name="nasa_image_of_the_day">L\'image du Journee NASA</string>
+    <string name="nasa_earth_imagery_database">Image du terre NASA</string>
+    <string name="bbc_news_reader">recherche d\'un post BBC</string>
+    <string name="new_search">Nouveau recherche</string>
+    <string name="view_favorites">List preferee</string>
+    <string name="welcome_to_the_nasa_earth_imagery_database">Bienvenue au recherche d\'un image</string>
+    <string name="guardian_news">Nouvelle Guardian</string>
+    <string name="image_of_day">Image du journer</string>
+    <string name="earth_images">Image du terre</string>
+    <string name="bbc_news">Nouvelle BBC</string>
+    <string name="help_message">Besoin de l\'aide?</string>
+    <string name="help">Aide</string>
+    <string name="nasa_earth_image_search">NASA image du terre</string>
+    <string name="hide">Cacher</string>
+    <string name="delete_image">enlever l\'image</string>
+    <string name="search_new_location">nouveau recherche</string>
+    <string name="return_to_home_screen">retourner au premier ecran</string>
+</resources>
