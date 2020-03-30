@@ -15,11 +15,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.FrameLayout
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.finalproject.MyDatabaseHelper.Companion.KEY_FAVOURITE
+import com.example.finalproject.MyDatabaseHelper.Companion.KEY_ID
 import com.example.finalproject.R.layout.row_layout_article
 import kotlinx.android.synthetic.main.activity_bbc_news_reader.*
 import org.xmlpull.v1.XmlPullParser
@@ -43,6 +42,7 @@ class BbcNewsReader : AppCompatActivity() {
     val DESCRIPTION = "DESCRIPTION"
     val PUBDATE = "PUBDATE"
     val LINK = "LINK"
+    val FAVOURITE = "FAVOURITE"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,41 +50,89 @@ class BbcNewsReader : AppCompatActivity() {
         progressBarBBC.visibility = INVISIBLE
         isPhone = (findViewById<FrameLayout>(R.id.frameLayout) == null)
 
+        dbHelper = MyDatabaseHelper(this)
+        db = dbHelper!!.writableDatabase
+
         val articleList = findViewById<ListView>(R.id.bbcNewsList)
         articleList.adapter = adapter
 
+        // Uncomment this block if you want to add all existing articles in db to the list on each load.
+        // The db articles would load above the articles from the rss feed as it currently is,
+        // due to the id numbering from the db, and the call to loadArticlesFromXml being below.
+        //
+        /*val cursorOfMessages = db!!.rawQuery("SELECT * FROM ArticlesTable", null)
+        cursorOfMessages.moveToFirst()
+        while (cursorOfMessages.moveToNext()) {
+            if (!cursorOfMessages.isAfterLast) {
+                val id = cursorOfMessages.getInt(0).toLong()
+                val title = cursorOfMessages.getString(1)
+                val description = cursorOfMessages.getString(2)
+                val pubDate = cursorOfMessages.getString(3)
+                val link = cursorOfMessages.getString(4)
+                val isFavourite: Boolean = cursorOfMessages.getInt(5) == 1
+                val tempArticle = Article(title, description, id, link, pubDate, isFavourite)
+
+                elements.add(tempArticle)
+                adapter.notifyDataSetChanged()
+            }
+        }
+        cursorOfMessages.close()*/
+
         articleList.setOnItemClickListener { list, view, position, id ->
             run {
-                val messageBundle = Bundle()
-                messageBundle.putString(TITLE, elements[position].title)
-                messageBundle.putLong(ARTICLE_ID, id)
-                messageBundle.putString(DESCRIPTION, elements[position].description)
-                messageBundle.putString(PUBDATE, elements[position].pubDate)
-                messageBundle.putString(LINK, elements[position].link)
+                val articleBundle = Bundle()
+                articleBundle.putString(TITLE, elements[position].title)
+                articleBundle.putLong(ARTICLE_ID, id)
+                articleBundle.putString(DESCRIPTION, elements[position].description)
+                articleBundle.putString(PUBDATE, elements[position].pubDate)
+                articleBundle.putString(LINK, elements[position].link)
+                articleBundle.putBoolean(FAVOURITE, elements[position].isFavourite)
+                articleBundle.putBoolean("isPhone", isPhone!!)
                 if(!isPhone!!) {
                     val fragTransaction = supportFragmentManager.beginTransaction()
                     df = BbcNewsDetailsFragment()
-                    df!!.arguments = messageBundle
+                    df!!.arguments = articleBundle
                     fragTransaction.replace(R.id.frameLayout, df!!)
                     fragTransaction.commit()
                 }
                 else{
                     val intent = Intent(this, BbcNewsDetails::class.java)
-                    intent.putExtra("bundle", messageBundle)
+                    intent.putExtra("bundle", articleBundle)
                     startActivity(intent)
                 }
             }
+        }
+        articleList.setOnItemLongClickListener { parent, view, position, id ->
 
+            val builder = AlertDialog.Builder(this)
 
+            builder.setMessage("The article selected is:\n"+elements[position].title+" \n")
+
+                    .setCancelable(false)
+                    .setPositiveButton("Favourite") { dialog, _ ->
+                        val article = elements[position]
+                        article.isFavourite = true
+
+                        db = dbHelper!!.writableDatabase
+                        var updateString = "UPDATE ArticlesTable SET $KEY_FAVOURITE = 1 WHERE $KEY_ID ="+ elements[position].id
+                        db!!.execSQL(updateString)
+                    }
+                    .setNeutralButton("Unfavourite") { dialog, _ ->
+                        val article = elements[position]
+                        article.isFavourite = false
+
+                        db = dbHelper!!.writableDatabase
+                        var updateString = "UPDATE ArticlesTable SET $KEY_FAVOURITE = 0 WHERE $KEY_ID ="+ elements[position].id
+                        db!!.execSQL(updateString)
+                    }
+                    .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel()}
+            val alert = builder.create()
+            alert.setTitle("Do you want to favourite this?")
+            alert.show()
+            return@setOnItemLongClickListener true
         }
         mainMenuButton.setOnClickListener { finish()}
         favouritesButton.setOnClickListener{ startActivity(Intent(this, BbcFavouritesMenu::class.java))}
-
-        dbHelper = MyDatabaseHelper(this)
-        db = dbHelper!!.writableDatabase
-
-        //dbHelper!!.onUpgrade(db, 1, 1)
-
 
         loadArticlesFromXml()
     }
@@ -92,11 +140,12 @@ class BbcNewsReader : AppCompatActivity() {
     fun loadArticlesFromXml(){
 
         ArticleQuery().execute()
+        Toast.makeText(this, "All articles loaded from BBC", Toast.LENGTH_SHORT).show()
 
     }
 
     fun createArticle(title: String, description: String, pubDate: String, link: String) : Article{
-        val article = Article(title = title, description =  description,link =  link, pubDate =  pubDate)
+        val article = Article(title = title, description =  description,link =  link, pubDate =  pubDate, isFavourite = false)
         article.id = dbHelper!!.addArticle(article)
 
         elements.add(article)
@@ -243,10 +292,11 @@ class MyDatabaseHelper(context: Context) :  SQLiteOpenHelper(context,
         const val KEY_DESCRIPTION = "description"
         const val KEY_PUBDATE = "pubDate"
         const val KEY_LINK = "link"
+        const val KEY_FAVOURITE = "favourite"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_ARTICLES_TABLE = ("CREATE TABLE $TABLE_ARTICLES ( $KEY_ID INTEGER PRIMARY KEY AUTOINCREMENT, $KEY_TITLE TEXT, $KEY_DESCRIPTION INTEGER, $KEY_PUBDATE TEXT, $KEY_LINK TEXT)")
+        val CREATE_ARTICLES_TABLE = ("CREATE TABLE $TABLE_ARTICLES ( $KEY_ID INTEGER PRIMARY KEY AUTOINCREMENT, $KEY_TITLE TEXT, $KEY_DESCRIPTION INTEGER, $KEY_PUBDATE TEXT, $KEY_LINK TEXT, $KEY_FAVOURITE INTEGER)")
         db?.execSQL(CREATE_ARTICLES_TABLE)
     }
 
@@ -263,6 +313,7 @@ class MyDatabaseHelper(context: Context) :  SQLiteOpenHelper(context,
         contentValues.put(KEY_DESCRIPTION, art.description)
         contentValues.put(KEY_PUBDATE, art.pubDate)
         contentValues.put(KEY_LINK, art.link)
+        contentValues.put(KEY_FAVOURITE, art.isFavourite)
 
         val success = db.insert(TABLE_ARTICLES, null, contentValues)
 
@@ -270,7 +321,7 @@ class MyDatabaseHelper(context: Context) :  SQLiteOpenHelper(context,
         return success
     }
 
-    fun viewMessages():List<Article>{
+    fun viewArticles():List<Article>{
         val artList:ArrayList<Article> = ArrayList()
         val selectQuery = "SELECT * FROM $TABLE_ARTICLES"
         val db = this.readableDatabase
@@ -286,22 +337,26 @@ class MyDatabaseHelper(context: Context) :  SQLiteOpenHelper(context,
         var artDescription: String
         var artLink: String
         var artPubDate: String
+        var artFavourite: Boolean = false
 
         Log.d("testing", cursor.getColumnName(0)  )
         if (cursor.moveToFirst()) {
             do {
+                cursor.moveToNext()
                 artId = cursor.getInt(cursor.getColumnIndex("Id")).toLong()
                 artTitle = cursor.getString(cursor.getColumnIndex("Title"))
                 artDescription = cursor.getString(cursor.getColumnIndex("Description"))
                 artLink = cursor.getString(cursor.getColumnIndex("Link"))
                 artPubDate = cursor.getString(cursor.getColumnIndex("PubDate"))
+                artFavourite = cursor.getInt(cursor.getColumnIndex("Favourite")) == 1
 
                 val art= Article(
                         id = artId,
                         title = artTitle,
                         description = artDescription,
                         link = artLink,
-                        pubDate = artPubDate
+                        pubDate = artPubDate,
+                        isFavourite = artFavourite
                 )
                 artList.add(art)
             } while (cursor.moveToNext())
@@ -309,7 +364,7 @@ class MyDatabaseHelper(context: Context) :  SQLiteOpenHelper(context,
         return artList
     }
 
-    fun deleteMessage(art: Article):Int{
+    fun deleteArticle(art: Article):Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, art.id)
@@ -322,6 +377,6 @@ class MyDatabaseHelper(context: Context) :  SQLiteOpenHelper(context,
 }
 
 
-class Article(val title: String, val description: String, var id: Long? = 0, var link: String, var pubDate: String) {
+class Article(val title: String, val description: String, var id: Long? = 0, var link: String, var pubDate: String, var isFavourite: Boolean = false) {
     override fun toString(): String { return title }
 }

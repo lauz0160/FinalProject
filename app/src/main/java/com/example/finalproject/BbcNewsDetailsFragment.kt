@@ -1,12 +1,17 @@
 package com.example.finalproject
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,21 +32,73 @@ class BbcNewsDetailsFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-    }
+    }*/
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bbc_news_details_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_bbc_news_details_fragment, container, false)
+
+        val titleView: TextView = view.findViewById(R.id.titleTextDetails)
+        val descriptionView: TextView = view.findViewById(R.id.descriptionTextDetails)
+        val pubDateView: TextView = view.findViewById(R.id.pubDateTextDetails)
+        val linkView: TextView = view.findViewById(R.id.linkTextDetails)
+        val isFavouriteView: TextView = view.findViewById(R.id.isFavouriteTextDetails)
+
+        val dataFromActivity = arguments
+
+        if (dataFromActivity != null) {
+            titleView.text = dataFromActivity.getString(BbcNewsReader().TITLE)
+            descriptionView.text = dataFromActivity.getString(BbcNewsReader().DESCRIPTION)
+            pubDateView.text = dataFromActivity.getString(BbcNewsReader().PUBDATE)
+            linkView.text = dataFromActivity.getString(BbcNewsReader().LINK)
+            if(dataFromActivity.getBoolean(BbcNewsReader().FAVOURITE))
+                isFavouriteView.text = getString(R.string.ifFavourited)
+            else
+                isFavouriteView.text = ""
+
+        }
+
+
+        val backButton : Button = view.findViewById(R.id.backButton)
+        backButton.setOnClickListener { clk ->
+            //For tablet:
+            if (!dataFromActivity!!.getBoolean("isPhone")) { //both the list and details are on the screen:
+                val parent = activity as BbcNewsDetails
+                //now remove the fragment since you deleted it from the database:
+                // this is the object to be removed, so remove(this):
+                parent.supportFragmentManager.beginTransaction().remove(this).commit()
+            }
+
+            //For phone:
+            else
+            //You are only looking at the details, you need to go back to the previous list page
+            {
+                val parent = activity as BbcNewsDetails?
+                val backToFragmentExample = Intent()
+                backToFragmentExample.putExtra("bundle", arguments )
+
+                parent!!.setResult(
+                        Activity.RESULT_OK,
+                        backToFragmentExample
+                ) //send data back to FragmentExample in onActivityResult()
+                parent.finish() //go back
+            }
+        }
+
+
+        return view
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }
@@ -51,7 +108,7 @@ class BbcNewsDetailsFragment : Fragment() {
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
     }
 
@@ -72,7 +129,7 @@ class BbcNewsDetailsFragment : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+
         fun onFragmentInteraction(uri: Uri)
     }
 
@@ -85,7 +142,6 @@ class BbcNewsDetailsFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment BBC_news_details_fragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
                 BbcNewsDetailsFragment().apply {
