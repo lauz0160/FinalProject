@@ -30,6 +30,7 @@ class BbcFavouritesMenu : AppCompatActivity() {
     val PUBDATE = "PUBDATE"
     val LINK = "LINK"
     val FAVOURITE = "FAVOURITE"
+    val NOTE = "NOTE"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +55,8 @@ class BbcFavouritesMenu : AppCompatActivity() {
                 val pubDate = cursorOfMessages.getString(3)
                 val link = cursorOfMessages.getString(4)
                 val isFavourite: Boolean = cursorOfMessages.getInt(5) == 1
-                val tempArticle = Article(title, description, id, link, pubDate, isFavourite)
+                val note = cursorOfMessages.getString(6)
+                val tempArticle = Article(title, description, id, link, pubDate, isFavourite, note)
 
                 if(tempArticle.isFavourite)
                     elements.add(tempArticle)
@@ -75,6 +77,7 @@ class BbcFavouritesMenu : AppCompatActivity() {
                 articleBundle.putString(PUBDATE, elements[position].pubDate)
                 articleBundle.putString(LINK, elements[position].link)
                 articleBundle.putBoolean(FAVOURITE, elements[position].isFavourite)
+                articleBundle.putString(NOTE, elements[position].note)
                 articleBundle.putBoolean("isPhone", isPhone!!)
                 if(!isPhone!!) {
                     val fragTransaction = supportFragmentManager.beginTransaction()

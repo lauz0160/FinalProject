@@ -24,4 +24,5 @@
     <string name="cancel">Cancel</string>
     <string name="wantToUnfavourite">Do you want to remove this from favourites?</string>
     <string name="addFavSnackbar">\tArticle Added To Favourites List</string>
+    <string name="favNote">Enter a note about this article</string>
 </resources>
