@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/listLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,7 @@
         android:id="@+id/bbcNewsList"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="19"
+        android:layout_weight="18"
         />
 
     <androidx.core.widget.ContentLoadingProgressBar
@@ -23,8 +24,30 @@
         android:layout_weight="1"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/lastArticleButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lastArticleButton"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/helpButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/helpButton"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
             android:id="@+id/favouritesButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/favouritesButton"
             android:layout_gravity="bottom"
@@ -32,7 +55,7 @@
             />
         <Button
             android:id="@+id/mainMenuButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/mainMenuButton"
             android:layout_gravity="bottom"

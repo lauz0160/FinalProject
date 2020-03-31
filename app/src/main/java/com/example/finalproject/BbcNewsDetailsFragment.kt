@@ -55,20 +55,18 @@ class BbcNewsDetailsFragment : Fragment() {
         val isFavouriteView: TextView = view.findViewById(R.id.isFavouriteTextDetails)
 
         val dataFromActivity = arguments
-
         if (dataFromActivity != null) {
             titleView.text = dataFromActivity.getString(BbcNewsReader().TITLE)
             descriptionView.text = dataFromActivity.getString(BbcNewsReader().DESCRIPTION)
             pubDateView.text = dataFromActivity.getString(BbcNewsReader().PUBDATE)
             linkView.text = dataFromActivity.getString(BbcNewsReader().LINK)
             if(dataFromActivity.getBoolean(BbcNewsReader().FAVOURITE))
-                isFavouriteView.text = getString(R.string.ifFavourited)
-            else
-                isFavouriteView.text = ""
-
+                isFavouriteView.text = getString(R.string.ifFavourited) else isFavouriteView.text = ""
         }
-
-
+        linkView.setOnClickListener{
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(dataFromActivity!!.getString(BbcNewsReader().LINK)))
+            startActivity(browserIntent)
+        }
         val backButton : Button = view.findViewById(R.id.backButton)
         backButton.setOnClickListener { clk ->
             //For tablet:

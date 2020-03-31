@@ -14,12 +14,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
+import android.view.View.TEXT_ALIGNMENT_CENTER
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.finalproject.MyDatabaseHelper.Companion.KEY_FAVOURITE
 import com.example.finalproject.MyDatabaseHelper.Companion.KEY_ID
 import com.example.finalproject.R.layout.row_layout_article
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_bbc_news_reader.*
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
@@ -43,12 +45,24 @@ class BbcNewsReader : AppCompatActivity() {
     val PUBDATE = "PUBDATE"
     val LINK = "LINK"
     val FAVOURITE = "FAVOURITE"
+    var lastArticleId : Long? = 0
+
+    fun View.snack(message: String){
+
+        var snack = Snackbar.make( this,message, Snackbar.LENGTH_LONG)
+        var textView = snack.view
+                .findViewById<TextView>(R.id.snackbar_text)
+        textView.textAlignment = TEXT_ALIGNMENT_CENTER
+        snack.show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbc_news_reader)
         progressBarBBC.visibility = INVISIBLE
         isPhone = (findViewById<FrameLayout>(R.id.frameLayout) == null)
+        var sharedPrefs = this.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        lastArticleId = sharedPrefs.getLong("lastArticleId", 0)
 
         dbHelper = MyDatabaseHelper(this)
         db = dbHelper!!.writableDatabase
@@ -80,6 +94,7 @@ class BbcNewsReader : AppCompatActivity() {
 
         articleList.setOnItemClickListener { list, view, position, id ->
             run {
+                lastArticleId = elements[position].id
                 val articleBundle = Bundle()
                 articleBundle.putString(TITLE, elements[position].title)
                 articleBundle.putLong(ARTICLE_ID, id)
@@ -103,33 +118,68 @@ class BbcNewsReader : AppCompatActivity() {
             }
         }
         articleList.setOnItemLongClickListener { parent, view, position, id ->
-
             val builder = AlertDialog.Builder(this)
-
-            builder.setMessage("The article selected is:\n"+elements[position].title+" \n")
+            builder.setMessage(elements[position].title+" \n")
 
                     .setCancelable(false)
-                    .setPositiveButton("Favourite") { dialog, _ ->
+                    .setPositiveButton(R.string.favourite) { dialog, _ ->
                         val article = elements[position]
                         article.isFavourite = true
 
                         db = dbHelper!!.writableDatabase
                         var updateString = "UPDATE ArticlesTable SET $KEY_FAVOURITE = 1 WHERE $KEY_ID ="+ elements[position].id
                         db!!.execSQL(updateString)
+
+                        findViewById<LinearLayout>(R.id.listLayout).snack(resources.getString(R.string.addFavSnackbar))
+
                     }
-                    .setNeutralButton("Unfavourite") { dialog, _ ->
+                    .setNeutralButton(R.string.unfavourite) { dialog, _ ->
                         val article = elements[position]
                         article.isFavourite = false
-
                         db = dbHelper!!.writableDatabase
                         var updateString = "UPDATE ArticlesTable SET $KEY_FAVOURITE = 0 WHERE $KEY_ID ="+ elements[position].id
                         db!!.execSQL(updateString)
                     }
-                    .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel()}
+                    .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.cancel()}
             val alert = builder.create()
-            alert.setTitle("Do you want to favourite this?")
+            alert.setTitle(R.string.wantToFavourite)
             alert.show()
             return@setOnItemLongClickListener true
+        }
+        helpButton.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage(getString(R.string.helpDialog))
+                    .setCancelable(false)
+                    .setNegativeButton("Close") { dialog, _ -> dialog.cancel()}
+            val alert = builder.create()
+            alert.setTitle(R.string.howToUse)
+            alert.show()
+        }
+        lastArticleButton.setOnClickListener {
+            val articleBundle = Bundle()
+            db = dbHelper!!.writableDatabase
+            val cursorOfMessages = db!!.rawQuery("SELECT * FROM ArticlesTable WHERE ID = $lastArticleId", null)
+            cursorOfMessages.moveToFirst()
+            articleBundle.putLong(ARTICLE_ID, cursorOfMessages.getInt(0).toLong())
+            articleBundle.putString(TITLE, cursorOfMessages.getString(1))
+            articleBundle.putString(DESCRIPTION, cursorOfMessages.getString(2))
+            articleBundle.putString(PUBDATE, cursorOfMessages.getString(3))
+            articleBundle.putString(LINK, cursorOfMessages.getString(4))
+            articleBundle.putBoolean(FAVOURITE, cursorOfMessages.getInt(5) == 1)
+            articleBundle.putBoolean("isPhone", isPhone!!)
+            cursorOfMessages.close()
+            if(!isPhone!!) {
+                val fragTransaction = supportFragmentManager.beginTransaction()
+                df = BbcNewsDetailsFragment()
+                df!!.arguments = articleBundle
+                fragTransaction.replace(R.id.frameLayout, df!!)
+                fragTransaction.commit()
+            }
+            else{
+                val intent = Intent(this, BbcNewsDetails::class.java)
+                intent.putExtra("bundle", articleBundle)
+                startActivity(intent)
+            }
         }
         mainMenuButton.setOnClickListener { finish()}
         favouritesButton.setOnClickListener{ startActivity(Intent(this, BbcFavouritesMenu::class.java))}
@@ -137,10 +187,19 @@ class BbcNewsReader : AppCompatActivity() {
         loadArticlesFromXml()
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        val prefs = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val prefsEditor = prefs.edit()
+        prefsEditor.putLong("lastArticleId", lastArticleId!!)
+        prefsEditor.apply()
+    }
+
     fun loadArticlesFromXml(){
 
         ArticleQuery().execute()
-        Toast.makeText(this, "All articles loaded from BBC", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, R.string.allArtLoaded, Toast.LENGTH_SHORT).show()
 
     }
 
@@ -154,94 +213,94 @@ class BbcNewsReader : AppCompatActivity() {
         return article
     }
 
-        inner class ArticleQuery : AsyncTask<String, Int, String>() {
-            var title : String = ""
-            var description : String = ""
-            var pubDate : String = ""
-            var link : String = ""
-            override fun doInBackground(vararg params: String?): String {
-                val bbcUrl = "http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"
+    internal inner class ArticleQuery : AsyncTask<String, Int, String>() {
+    var title : String = ""
+    var description : String = ""
+    var pubDate : String = ""
+    var link : String = ""
+        override fun doInBackground(vararg params: String?): String {
+            val bbcUrl = "http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"
 
-                var ret = ""
+            var ret = ""
 
-                try {
-                    val url = URL(bbcUrl)
-                    val urlConnection = url.openConnection() as HttpURLConnection
-                    val inStream = urlConnection.inputStream
+            try {
+                val url = URL(bbcUrl)
+                val urlConnection = url.openConnection() as HttpURLConnection
+                val inStream = urlConnection.inputStream
 
-                    //Set up the XML parser:
-                    val factory = XmlPullParserFactory.newInstance()
-                    factory.isNamespaceAware = false
-                    val xpp = factory.newPullParser()
-                    xpp.setInput(inStream, "UTF-8")
+                //Set up the XML parser:
+                val factory = XmlPullParserFactory.newInstance()
+                factory.isNamespaceAware = false
+                val xpp = factory.newPullParser()
+                xpp.setInput(inStream, "UTF-8")
 
 
-                    var eventType: Int = xpp.eventType      //While not the end of the document:
-                    while (eventType != XmlPullParser.END_DOCUMENT) {
-                        eventType = xpp.eventType
-                        when (eventType) {
-                            XmlPullParser.START_TAG         //This is a start tag < ... >
-                            -> {
-                                if(xpp.name == "item")
-                                    Log.i("ArticleFound","New Article Found")
-                                Thread.sleep(1)
-                                when (xpp.name) {
-                                    "title" -> {
-                                        xpp.next()
-                                        title = xpp.text
-                                        publishProgress(25)
-                                    }
-                                    "description" -> {
-                                        xpp.next()
-                                        description = xpp.text
-                                        publishProgress(50)
-                                    }
-                                    "link" -> {
-                                        xpp.next()
-                                        link = xpp.text
-                                        publishProgress(75)
-                                    }
-                                    "pubDate" -> {
-                                        xpp.next()
-                                        pubDate = xpp.text
-                                        publishProgress(100)
-                                    }
-                                    null -> {
+                var eventType: Int = xpp.eventType      //While not the end of the document:
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    eventType = xpp.eventType
+                    when (eventType) {
+                        XmlPullParser.START_TAG         //This is a start tag < ... >
+                        -> {
+                            if(xpp.name == "item")
+                                Log.i("ArticleFound","New Article Found")
+                            Thread.sleep(1)
+                            when (xpp.name) {
+                                "title" -> {
+                                    xpp.next()
+                                    title = xpp.text
+                                    publishProgress(25)
+                                }
+                                "description" -> {
+                                    xpp.next()
+                                    description = xpp.text
+                                    publishProgress(50)
+                                }
+                                "link" -> {
+                                    xpp.next()
+                                    link = xpp.text
+                                    publishProgress(75)
+                                }
+                                "pubDate" -> {
+                                    xpp.next()
+                                    pubDate = xpp.text
+                                    publishProgress(100)
+                                }
+                                null -> {
 
-                                    }
                                 }
                             }
-                            XmlPullParser.END_TAG           //This is an end tag: </ ... >
-                            -> {
-                            }
-                            XmlPullParser.TEXT              //This is text between tags < ... > Hello world </ ... >
-                            -> {
-                            }
                         }
-                        xpp.next() // move the pointer to next XML element
+                        XmlPullParser.END_TAG           //This is an end tag: </ ... >
+                        -> {
+                        }
+                        XmlPullParser.TEXT              //This is text between tags < ... > Hello world </ ... >
+                        -> {
+                        }
                     }
+                    xpp.next() // move the pointer to next XML element
                 }
-                catch(ex: MalformedURLException){
-                    ret = "MalformedUrlException"
-                }
-                catch(ex : IOException ){
-                    ret = "IO Exception"
-                }
-                catch(ex : XmlPullParserException){
-                    ret = "XML Pull Exception. The XML is not properly formed"
-                }
-                return ret
             }
+            catch(ex: MalformedURLException){
+                ret = "MalformedUrlException"
+            }
+            catch(ex : IOException ){
+                ret = "IO Exception"
+            }
+            catch(ex : XmlPullParserException){
+                ret = "XML Pull Exception. The XML is not properly formed"
+            }
+            return ret
+        }
 
-            override fun onProgressUpdate(vararg progress: Int?){
-                super.onProgressUpdate(progress[0])
-                //progressBarBBC.visibility = View.VISIBLE
-                //progressBarBBC.progress = progress
-                if(progress[0] == 100)
-                    createArticle(title, description, pubDate, link)
-            }
+        override fun onProgressUpdate(vararg progress: Int?){
+            super.onProgressUpdate(progress[0])
+            //progressBarBBC.visibility = View.VISIBLE
+            //progressBarBBC.progress = progress
+            if(progress[0] == 100)
+                createArticle(title, description, pubDate, link)
         }
     }
+}
 
 
 class BbcArticleAdapter(private val context: Context, private val dataSource: ArrayList<Article>) : BaseAdapter(){

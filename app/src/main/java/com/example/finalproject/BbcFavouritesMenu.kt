@@ -67,6 +67,7 @@ class BbcFavouritesMenu : AppCompatActivity() {
 
         articleList.setOnItemClickListener { list, view, position, id ->
             run {
+                BbcNewsReader().lastArticleId = id
                 val articleBundle = Bundle()
                 articleBundle.putString(TITLE, elements[position].title)
                 articleBundle.putLong(ARTICLE_ID, id)
@@ -74,7 +75,6 @@ class BbcFavouritesMenu : AppCompatActivity() {
                 articleBundle.putString(PUBDATE, elements[position].pubDate)
                 articleBundle.putString(LINK, elements[position].link)
                 articleBundle.putBoolean(FAVOURITE, elements[position].isFavourite)
-
                 articleBundle.putBoolean("isPhone", isPhone!!)
                 if(!isPhone!!) {
                     val fragTransaction = supportFragmentManager.beginTransaction()
@@ -94,10 +94,10 @@ class BbcFavouritesMenu : AppCompatActivity() {
 
             val builder = AlertDialog.Builder(this)
 
-            builder.setMessage("The article selected is:\n"+elements[position].title+" \n")
+            builder.setMessage("\n"+elements[position].title+" \n")
 
                     .setCancelable(false)
-                    .setPositiveButton("Unfavourite") { dialog, _ ->
+                    .setPositiveButton(R.string.unfavourite) { dialog, _ ->
                         val article = elements[position]
                         article.isFavourite = false
                         db = dbHelper!!.writableDatabase
@@ -106,9 +106,9 @@ class BbcFavouritesMenu : AppCompatActivity() {
                         elements.remove(elements[position])
                         adapter.notifyDataSetChanged()
                     }
-                    .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel()}
+                    .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.cancel()}
             val alert = builder.create()
-            alert.setTitle("Do you want to remove this from favourites?")
+            alert.setTitle(R.string.wantToUnfavourite)
             alert.show()
             return@setOnItemLongClickListener true
         }

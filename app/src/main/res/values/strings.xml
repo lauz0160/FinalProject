@@ -3,9 +3,25 @@
     <string name="favouritesButton">Favourites</string>
     <string name="mainMenuButton">Back To Menu</string>
     <string name="backToListButton">Back To BBC</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="titleText">Title Here</string>
+    <string name="titleText">Title</string>
     <string name="ifFavourited">** Favourited **</string>
+    <string name="artSelected">"Article selected is: "</string>
+    <string name="howToUse">How to use the BBC Reader</string>
+    <string name="allArtLoaded">All articles loaded from BBC</string>
+    <string name="lastArticleButton">Last Article Viewed</string>
+    <string name="helpButton">Help</string>
+    <string name="helpDialog">
+        Tap on an article to view details.
+        \n\nTap and hold an article to add to your favourites list.
+        \n\n\'Favourites\' will take you to your list of favourited articles.
+        \n\n\'Last Article Viewed\' will take you to the last article you looked at.
+        \n\nYou can click the link in the articles to go to the BBC webpage for that news article
+    </string>
+    <string name="favourite">Favourite</string>
+    <string name="unfavourite">Unfavourite</string>
+    <string name="wantToFavourite">Do you want to favourite this?</string>
+    <string name="cancel">Cancel</string>
+    <string name="wantToUnfavourite">Do you want to remove this from favourites?</string>
+    <string name="addFavSnackbar">\tArticle Added To Favourites List</string>
 </resources>
