@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".BbcNewsDetailsFragment">
+
+    <TextView
+        android:id="@+id/titleTextDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titleText"
+        android:paddingBottom="30dp"
+        android:paddingTop="30dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/isFavouriteTextDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titleText"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:paddingBottom="25dp"/>
+
+    <TextView
+        android:id="@+id/descriptionTextDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="25dp"
+        android:textSize="15sp"
+        android:text="@string/titleText" 
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/pubDateTextDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="25dp"
+        android:textSize="15sp"
+        android:textAlignment="center"
+        android:text="@string/titleText" />
+
+    <TextView
+        android:id="@+id/linkTextDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="25dp"
+        android:text="@string/titleText"
+        android:textAppearance="@style/Widget.AppCompat.Spinner.Underlined"
+        android:textSize="15sp"
+        android:textAlignment="center"
+        android:textColor="#0000FF"/>
+    <View
+        android:id="@+id/fillerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"/>
+    <EditText
+        android:id="@+id/favNoteText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/favNote"
+        android:autofillHints="@string/favNote"
+        tools:ignore="UnusedAttribute"
+        android:inputType="textMultiLine"
+        android:maxLines="6"/>
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/backToListButton"
+        android:layout_gravity="bottom"/>
+</LinearLayout>

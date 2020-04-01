@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         //button that triggers the BBC news article search
         Button btnBBC = findViewById(R.id.btnBBC);
-        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnBBC.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, BbcNewsReader.class)));
 
     }
 

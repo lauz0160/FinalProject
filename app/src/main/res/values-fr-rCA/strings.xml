@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FinalProject</string>
+    <string name="backToListButton">Retour à la BBC</string>
+    <string name="favouritesButton">Favoris</string>
+    <string name="hello_blank_fragment">Vide</string>
+    <string name="helpButton">Aidez-moi</string>
+    <string name="ifFavourited">Favori</string>
+    <string name="lastArticleButton">Dernier Article</string>
+    <string name="mainMenuButton">Retour au Menu</string>
+    <string name="titleText">Titre</string>
+    <string name="helpDialog">
+        Appuyez sur un article pour afficher les détails.
+        \n\nAppuyez longuement sur un article pour l\'ajouter à votre liste de favoris.
+        \n\nLes «Favoris» vous amèneront à votre liste d\'articles préférés.
+        \n\n«Dernier article» vous amène au dernier article que vous avez consulté.
+        \n\nVous pouvez cliquer sur le lien dans les articles pour accéder à la page Web de la BBC pour cet article de presse</string>
+    <string name="allArtLoaded">Tous les articles chargés de la BBC</string>
+    <string name="artSelected">L\'article sélectionné est:</string>
+    <string name="howToUse">Comment utiliser le lecteur BBC</string>
+    <string name="favourite">favori</string>
+    <string name="unfavourite">défavorisé</string>
+    <string name="wantToFavourite">Voulez-vous mettre ceci en favori?</string>
+    <string name="cancel">Annuler</string>
+    <string name="wantToUnfavourite">Voulez-vous le supprimer des favoris?</string>
+    <string name="addFavSnackbar">Article ajouté à la liste des favoris</string>
+</resources>
