@@ -15,7 +15,6 @@
         <activity android:name=".Earth_Favorites" />
         <activity android:name=".Earth_Search" />
         <activity android:name=".Earth_Main" />
-        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".BbcNewsDetails"/>
         <activity android:name=".BbcFavouritesMenu" />
         <activity android:name=".BbcNewsReader" />

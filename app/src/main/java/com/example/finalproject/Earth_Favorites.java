@@ -56,7 +56,7 @@ public class Earth_Favorites extends AppCompatActivity implements NavigationView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_earth__favorites);
+        setContentView(R.layout.activity_earth__favourites);
 
         //Sets the toolbar for the activity with the in-activity icons
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
