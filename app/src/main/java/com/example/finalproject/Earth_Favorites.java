@@ -284,9 +284,7 @@ public class Earth_Favorites extends AppCompatActivity implements NavigationView
      */
     private class MyListAdapter extends BaseAdapter {
 
-        public int getCount() {
-            return imagesList.size();
-        }
+        public int getCount() { return imagesList.size(); }
 
         public AnImage getItem(int position) {
             return imagesList.get(position);
@@ -320,7 +318,10 @@ public class Earth_Favorites extends AppCompatActivity implements NavigationView
             //sets the text of the list view row layout to the images data
             lat.setText("Latitude:     " + anImage.getLat());
             lon.setText("Longitude:  " + anImage.getLon());
-            date.setText("Date:           " + anImage.getDate());
+            if(anImage.getDate() !=null){
+                date.setText("Date:           " + anImage.getDate());
+            }
+
             return old;
         }
     }

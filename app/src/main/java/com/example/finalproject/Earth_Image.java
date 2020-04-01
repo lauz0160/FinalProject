@@ -25,15 +25,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Launches the Image display activity
@@ -43,7 +38,6 @@ public class Earth_Image extends AppCompatActivity implements NavigationView.OnN
 
     //global variables relating to image data
     private Bitmap image;
-    private String date;
     private String fileName;
     private String lat;
     private String lon;
@@ -105,7 +99,7 @@ public class Earth_Image extends AppCompatActivity implements NavigationView.OnN
         Button save = findViewById(R.id.btnSaveFav);
         save.setOnClickListener(btn -> {
             try {
-                fileName = lat + lon + date + ".png";
+                fileName = lat + lon + ".png";
                 FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
                 image.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
                 outputStream.flush();
@@ -115,10 +109,10 @@ public class Earth_Image extends AppCompatActivity implements NavigationView.OnN
                     Log.e("Error", e.getMessage());
             }
 
-            startActivity(new Intent(Earth_Image.this, Earth_Favorites.class).putExtra("lat", lat).putExtra("lon", lon).putExtra("image", fileName).putExtra("date", date));
+            startActivity(new Intent(Earth_Image.this, Earth_Favorites.class).putExtra("lat", lat).putExtra("lon", lon).putExtra("image", fileName));
         });
         //this send the url to the AsyncTask
-        new GetData().execute("https://api.nasa.gov/planetary/earth/imagery/?lon=" + lon + "&lat=" + lat + "&date=2014-02-01&api_key=DEMO_KEY");
+        new GetData().execute("http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/" + lat + "," + lon + "/20?dir=180&ms=500,500&key=AkYKOT4zFh9RFk8QFu4M7wkYSQHRo5HaD1PRiFMo3TVnz7e2sfAGWXa_roMIQXD3");
     }
 
     @Override
@@ -192,28 +186,16 @@ public class Earth_Image extends AppCompatActivity implements NavigationView.OnN
             //advance progress bar to 50% while connection is being made to the url
             publishProgress(50);
             try {
-                //open the connection and pull the data using a json
-                HttpURLConnection Connection = (HttpURLConnection) new URL(strings[0]).openConnection();
-                Connection.connect();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(Connection.getInputStream(), StandardCharsets.UTF_8), 8);
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line).append("\n");
-                }
-                JSONObject Report = new JSONObject(sb.toString());
-
-                //get the date from the json and cut off the time string
-                date = Report.getString("date").substring(0, 10);
-                publishProgress(75);
-
                 //get a new connection to the url of the image and save the image to the bitmap variable
-                HttpURLConnection imgconnection = (HttpURLConnection) new URL(Report.getString("url")).openConnection();
+                HttpURLConnection imgconnection = (HttpURLConnection) new URL(strings[0]).openConnection();
                 imgconnection.connect();
                 int responseCode = imgconnection.getResponseCode();
                 if (responseCode == 200) {
                     image = BitmapFactory.decodeStream(imgconnection.getInputStream());
                     publishProgress(100);
+                }
+                else{
+                    Snackbar.make(findViewById(R.id.imageView), "", Snackbar.LENGTH_INDEFINITE).setText("Image not found").setAction("Return to search", click -> finish()).show();
                 }
             } catch (Exception e) {
                 //if the data cant be found make a toast saying the image cant be found
@@ -242,9 +224,6 @@ public class Earth_Image extends AppCompatActivity implements NavigationView.OnN
             ImageView pic = findViewById(R.id.imageView);
             pic.setImageBitmap(image);
             pic.setVisibility(View.VISIBLE);
-
-            TextView dateText = findViewById(R.id.dateValue);
-            dateText.setText(date);
 
             super.onPostExecute(s);
         }

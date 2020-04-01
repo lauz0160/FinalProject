@@ -54,7 +54,7 @@
                 android:layout_alignParentEnd="true"
                 android:autofillHints=""
                 android:hint="@string/latitude"
-                android:inputType="none" />
+                android:inputType="numberSigned|numberDecimal" />
 
             <TextView
                 android:id="@+id/textEnterLong"
@@ -74,7 +74,7 @@
                 android:layout_alignParentEnd="true"
                 android:autofillHints=""
                 android:hint="@string/longitude"
-                android:inputType="none" />
+                android:inputType="numberSigned|numberDecimal" />
 
             <Button
                 android:id="@+id/btnSearchDatabase"
