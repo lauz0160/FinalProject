@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +34,7 @@ public class GuardianMainActivity extends AppCompatActivity { //implements Navig
 
         //sets up top level navigation for app
         NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setItemIconTintList(null);
 
         //https://www.codota.com/code/java/methods/android.support.v4.app.FragmentActivity/getSupportFragmentManager
         searchFragment = new Guardian_Search();
@@ -40,7 +42,12 @@ public class GuardianMainActivity extends AppCompatActivity { //implements Navig
                 .commit();
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
-
+                case R.id.MainIcon:
+                    startActivity(new Intent(GuardianMainActivity.this, MainActivity.class));
+                    break;
+                case R.id.guardianIcon:
+                    startActivity(new Intent(GuardianMainActivity.this, GuardianMainActivity.class));
+                    break;
                 case R.id.drawerMenuSearch:
                     getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, searchFragment)
                             .commit();

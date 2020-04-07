@@ -4,6 +4,13 @@
 
     <group>
         <item
+            android:id="@+id/MainIcon"
+            android:icon="@drawable/home"
+            android:orderInCategory="50"
+            android:title="@string/MainMenu"
+            app:showAsAction="ifRoom" />
+
+        <item
             android:id="@+id/guardianIcon"
             android:icon="@drawable/guardian"
             android:orderInCategory="100"
@@ -39,7 +46,7 @@
             <item
                 android:id="@+id/helpIcon"
                 android:icon="@drawable/help"
-                android:orderInCategory="400"
+                android:orderInCategory="700"
                 android:title="@string/help"
                 app:showAsAction="always" />
         </menu>

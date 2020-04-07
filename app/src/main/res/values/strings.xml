@@ -106,6 +106,7 @@
         \n\ Click on the drawer icon to select search or your Favorites
         \n\ Click on a news articles URL to goto its page
     </string>
+    <string name="MainMenu">Main Menu</string>
 
 
 </resources>

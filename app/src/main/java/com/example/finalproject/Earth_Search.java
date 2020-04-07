@@ -91,8 +91,11 @@ public class Earth_Search extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         //Launch one of the other activites or the help dialog based on the navigation menu buttons is clicked
         switch (item.getItemId()) {
+            case R.id.MainIcon:
+                startActivity(new Intent(Earth_Search.this, MainActivity.class));
+                break;
             case R.id.guardianIcon:
-
+                startActivity(new Intent(Earth_Search.this, GuardianMainActivity.class));
                 break;
             case R.id.nasaImageIcon:
 
@@ -101,7 +104,7 @@ public class Earth_Search extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(Earth_Search.this, Earth_Main.class));
                 break;
             case R.id.bbcNewsIcon:
-
+                startActivity(new Intent(Earth_Search.this, BbcNewsReader.class));
                 break;
             case R.id.helpIcon:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

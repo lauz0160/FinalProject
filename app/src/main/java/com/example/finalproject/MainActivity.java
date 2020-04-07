@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         //button that triggers the Guardians news article search activity
         Button btnGuardian = findViewById(R.id.btnGuardian);
-        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnGuardian.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, GuardianMainActivity.class)));
 
         //button that triggers the NASA earth image search
         Button btnEarth = findViewById(R.id.btnEarthImage);

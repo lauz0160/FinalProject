@@ -18,6 +18,11 @@
         <activity android:name=".BbcNewsDetails"/>
         <activity android:name=".BbcFavouritesMenu" />
         <activity android:name=".BbcNewsReader" />
+        <activity android:name=".Guardian_DataBase"/>
+        <activity android:name=".Guardian_Fav"/>
+        <activity android:name=".GuardianMainActivity"/>
+        <activity android:name=".GuardianNewsList"/>
+        <activity android:name=".Guardian_Search"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
