@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Button btnImage = findViewById(R.id.btnImageOfDay);
-      //  btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, ImageOfDayActivity.class)));
 
         Button btnGuardian = findViewById(R.id.btnGuardian);
       //  btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));

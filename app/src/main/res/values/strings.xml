@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">FinalProject</string>
+
+    <string name="help_popup">This is a test help message</string>
+    <string name="search_hint">Enter date here</string>
+    <string name="search_favs_button">Search Favourites</string>
+    <string name="find_images_button">Find New Images</string>
+    <string name="list_alert_message">Select an Option</string>
+    <string name="list_alert_positive">View</string>
+    <string name="list_alert_negative">Delete</string>
+    <string name="list_alert_neutral">Cancel</string>
+    <string name="list_alert_canceled">Canceled</string>
+    <string name="list_alert_confirm_delete">Are you sure you wish to delete?</string>
+    <string name="confirm">Yes</string>
+    <string name="deny">No</string>
+    <string name="placeholder">Placeholder</string>
+
 </resources>
