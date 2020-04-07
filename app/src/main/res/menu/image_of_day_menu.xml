@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Item
+        android:id="@+id/help_menu"
+        android:icon="@drawable/placeholder"
+        android:title="@string/placeholder"
+        android:orderInCategory="1"
+        app:showAsAction="always|ifRoom|never" />
+
+    <Item
+        android:id="@+id/bbc_news"
+        android:icon="@drawable/placeholder"
+        android:title="@string/placeholder"
+        android:orderInCategory="2"
+        app:showAsAction="always|ifRoom|never"
+        />
+
+    <Item
+        android:id="@+id/earth_images"
+        android:icon="@drawable/placeholder"
+        android:title="@string/placeholder"
+        android:orderInCategory="3"
+        app:showAsAction="always|ifRoom|never"
+        />
+
+</menu>

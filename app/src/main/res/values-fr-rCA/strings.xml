@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FinalProject</string>
+
+    <string name="help_popup">Ceci est un test</string>
+    <string name="search_hint">Entrer la date ici</string>
+    <string name="search_favs_button">Chercher Favoris</string>
+    <string name="find_images_button">Decouvrer Images</string>
+
+</resources>

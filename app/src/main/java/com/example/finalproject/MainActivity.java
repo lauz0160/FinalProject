@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         //button that triggers the NASA image of the day activity
         Button btnImage = findViewById(R.id.btnImageOfDay);
-        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, ImageOfDayActivity.class)));
 
         //button that triggers the Guardians news article search activity
         Button btnGuardian = findViewById(R.id.btnGuardian);
