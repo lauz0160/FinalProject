@@ -67,4 +67,45 @@
     <string name="wantToUnfavourite">Do you want to remove this from favourites?</string>
     <string name="addFavSnackbar">\tArticle Added To Favourites List</string>
     <string name="favNote">Enter a note about this article</string>
+
+
+    <string name="text_guardian">The Guardian News Search Engine</string>
+    <string name="help_title">How to use</string>
+    <string name="version_title">Click for version</string>
+    <string name="help_version">Version: 1 </string>
+    <string name="author_title">Author</string>
+    <string name="got_it">Got It</string>
+    <string name="author_text">CST 2335 Guardian News Article Search Dan Brown</string>
+    <string name="author_exit">Return</string>
+    <string name="type_news_title">Type in Query to search</string>
+    <string name="openDrawer">Open Drawer</string>
+    <string name="closeDrawer">Close Drawer</string>
+    <string name="article_delete_confirm">Confirm</string>
+    <string name="article_save_confirm">Confirm</string>
+    <string name="saved">added to favorites</string>
+    <string name="add">added to favorites</string>
+    <string name="searchh">search</string>
+    <string name="url">URL:</string>
+    <string name="save">Add to Favorites</string>
+    <string name="delete">Delete</string>
+    <string name="remove">removed from favorites</string>
+    <string name="section">Section Name:</string>
+    <string name="article_details">Article Details</string>
+    <string name="article_delete">Confirm Deletion</string>
+    <string name="article_save">Confirm Adding to Favorites</string>
+    <string name="article_delete_cancel">Cancel</string>
+    <string name="article_save_cancel">Nevermind</string>
+    <string name="drawerSearch">CLICK HERE TO SEARCH</string>
+    <string name="drawerSave">CLICK HERE TO SEE YOUR FAVORITES</string>
+
+
+    <string name="help_text">
+        Type in a news article term to search for it
+         \n\ Click on a news article to view its details
+        \n\ Click on Save to add it to your favorites
+        \n\ Click on the drawer icon to select search or your Favorites
+        \n\ Click on a news articles URL to goto its page
+    </string>
+
+
 </resources>

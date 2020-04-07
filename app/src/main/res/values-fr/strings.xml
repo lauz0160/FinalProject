@@ -33,4 +33,42 @@
     <string name="delete_image">enlever l\'image</string>
     <string name="search_new_location">nouveau recherche</string>
     <string name="return_to_home_screen">retourner au premier ecran</string>
+
+
+    <string name="add">ajouté aux favoris</string>
+    <string name="article_delete">Confirmer la suppression</string>
+    <string name="article_delete_cancel">Annuler</string>
+    <string name="article_delete_confirm">Confirmer</string>
+    <string name="article_details">Détails de l\'article</string>
+    <string name="article_save">Confirmer l\'ajout aux favoris</string>
+    <string name="article_save_cancel">Ça ne fait rien</string>
+    <string name="article_save_confirm">Confirmer</string>
+    <string name="author_exit">Revenir</string>
+    <string name="author_text">CST 2335 Recherche d\'articles dans Guardian News Dan Brown</string>
+    <string name="author_title">Auteur</string>
+    <string name="closeDrawer">Fermer le tiroir</string>
+    <string name="delete">Supprimer</string>
+    <string name="got_it">Je l\'ai</string>
+    <string name="help_title">"  Comment utiliser"</string>
+    <string name="help_version">Version: 1</string>
+    <string name="openDrawer">Tiroir ouvert</string>
+    <string name="remove">retiré des favoris</string>
+    <string name="save">Ajouter aux Favoris</string>
+    <string name="saved">Ajouté aux favoris</string>
+    <string name="searchh">Chercher</string>
+    <string name="section">Nom de la section</string>
+    <string name="text_guardian">Le moteur de recherche de Guardian News</string>
+    <string name="type_news_title">Tapez Requête pour rechercher</string>
+    <string name="url">URL:</string>
+    <string name="version_title">Cliquez pour la version</string>
+    <string name="drawerSearch">CLIQUEZ ICI POUR RECHERCHER</string>
+    <string name="drawerSave">CLIQUEZ ICI POUR VOIR VOS FAVORIS</string>
+    <string name="favNote">Enter a note about this articleFRENCH</string>
+
+    <string name="help_text">Tapez un terme d\'article pour le rechercher
+        \n\ Cliquez sur un article pour voir ses détails
+        \n\ Cliquez sur Enregistrer pour ajouter à vos favoris
+        \n\ Cliquez sur licône du tiroir pour sélectionner la recherche ou vos favoris
+        \n\ Cliquez sur URL d\'un article pour accéder à sa page</string>
+
 </resources>
