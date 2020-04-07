@@ -92,7 +92,7 @@ public class Earth_Main extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(new Intent(Earth_Main.this, GuardianMainActivity.class));
                 break;
             case R.id.nasaImageIcon:
-
+                startActivity(new Intent(Earth_Main.this, ImageOfDayActivity.class));
                 break;
             case R.id.nasaEarthIcon:
                 startActivity(new Intent(Earth_Main.this, Earth_Main.class));

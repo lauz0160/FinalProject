@@ -98,7 +98,7 @@ public class Earth_Search extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(Earth_Search.this, GuardianMainActivity.class));
                 break;
             case R.id.nasaImageIcon:
-
+                startActivity(new Intent(Earth_Search.this, ImageOfDayActivity.class));
                 break;
             case R.id.nasaEarthIcon:
                 startActivity(new Intent(Earth_Search.this, Earth_Main.class));

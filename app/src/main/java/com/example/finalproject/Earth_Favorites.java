@@ -192,7 +192,7 @@ public class Earth_Favorites extends AppCompatActivity implements NavigationView
                 startActivity(new Intent(Earth_Favorites.this, GuardianMainActivity.class));
                 break;
             case R.id.nasaImageIcon:
-
+                startActivity(new Intent(Earth_Favorites.this, ImageOfDayActivity.class));
                 break;
             case R.id.nasaEarthIcon:
                 startActivity(new Intent(Earth_Favorites.this, Earth_Main.class));
