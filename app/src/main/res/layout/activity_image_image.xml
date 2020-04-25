@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Earth_Image">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="#FFFFFF" />
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/my_toolbar"
+        tools:openDrawer="start">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:id="@+id/imageName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:text="@string/earthImageDetails"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageName"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/longText"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/latText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dateValue"
+                android:layout_alignParentStart="true"
+                android:text="@string/earthImageLat" />
+
+            <TextView
+                android:id="@+id/latValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dateValue"
+                android:layout_alignStart="@id/longValue"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/longText"
+                android:text="@string/zero" />
+
+            <TextView
+                android:id="@+id/longText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/latText"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="10dp"
+                android:text="@string/earthImageLong" />
+
+            <TextView
+                android:id="@+id/longValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/latValue"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/longText"
+                android:text="@string/zero" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btnBackToSearch"
+                android:layout_below="@id/longText"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="30sp"
+                android:contentDescription="@string/nasa_images"
+                android:visibility="invisible"
+                app:srcCompat="@mipmap/ic_launcher_round" />
+
+            <Button
+                android:id="@+id/btnBackToSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btnSaveFav"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:text="@string/back_to_search" />
+
+            <Button
+
+                android:id="@+id/btnSaveFav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:text="@string/save_to_favorites" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btnBackToSearch"
+                android:layout_centerHorizontal="true"
+                android:progress="5" />
+        </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/earth_nav_header"
+            app:menu="@menu/earth_drawer" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</RelativeLayout>
