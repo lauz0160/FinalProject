@@ -41,7 +41,7 @@ public class Image_Fragment_Code extends Fragment {
         Bundle dataFromActivity = getArguments();
 
         //inflates the fragment
-        View result = inflater.inflate(R.layout.activity_fragment_code, container, false);
+        View result = inflater.inflate(R.layout.activity_earth_fragment_code, container, false);
 
         //pulls the image file name from the data that was passed to the fragment and decodes it to a bitmap
         if (dataFromActivity != null) {

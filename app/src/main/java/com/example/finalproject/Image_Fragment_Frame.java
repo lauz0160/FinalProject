@@ -12,7 +12,7 @@ public class Image_Fragment_Frame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment_frame);
+        setContentView(R.layout.activity_image_fragment_code);
 
         //creates new fragment using the arguments passed from the favorites screen based on which item was clicked and passes that info to the fragment
         Earth_Fragment_Code dFragment = new Earth_Fragment_Code();

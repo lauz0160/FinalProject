@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Project Final</string>
-    <string name="open">Ouvrir</string>
-    <string name="close">Fermer</string>
     <string name="earthImageDetails">Détail de l\'image:</string>
     <string name="earthImageLat">Latitude:</string>
     <string name="earthImageLong">Longitude:</string>
@@ -33,4 +31,5 @@
     <string name="delete_image">enlever l\'image</string>
     <string name="search_new_location">nouveau recherche</string>
     <string name="return_to_home_screen">retourner au premier ecran</string>
+    <string name="nasa_image_search">NASA Image du Journee</string>
 </resources>

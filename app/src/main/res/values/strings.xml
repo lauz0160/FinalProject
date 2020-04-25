@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Final Project</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
+    <string name="open" translatable="false">Open</string>
+    <string name="close" translatable="false">Close</string>
     <string name="earthImageDetails">Image Details:</string>
     <string name="earthImageLat">Latitude:</string>
     <string name="earthImageLong">Longitude:</string>
@@ -41,4 +41,6 @@
     <string name="date" translatable="false">Date:</string>
     <string name="search_new_location">Search New Location</string>
     <string name="return_to_home_screen">Return to home screen</string>
+    <string name="nasa_image_search">NASA Image of The Day</string>
+    <string name="versionImage" translatable="false">Version 1</string>
 </resources>

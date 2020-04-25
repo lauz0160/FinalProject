@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Earth_Image">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -26,71 +25,46 @@
             android:layout_margin="15dp">
 
             <TextView
-                android:id="@+id/imageName"
+                android:id="@+id/imageTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:text="@string/earthImageDetails"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/DateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageTitle"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="center"
                 android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/dateValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imageName"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/longText"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/latText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dateValue"
-                android:layout_alignParentStart="true"
-                android:text="@string/earthImageLat" />
-
-            <TextView
-                android:id="@+id/latValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dateValue"
-                android:layout_alignStart="@id/longValue"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/longText"
-                android:text="@string/zero" />
-
-            <TextView
-                android:id="@+id/longText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latText"
-                android:layout_alignParentStart="true"
-                android:layout_marginEnd="10dp"
-                android:text="@string/earthImageLong" />
-
-            <TextView
-                android:id="@+id/longValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latValue"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/longText"
-                android:text="@string/zero" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/btnBackToSearch"
-                android:layout_below="@id/longText"
+                android:layout_height="260dp"
+                android:layout_below="@id/DateValue"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_margin="30sp"
+                android:layout_margin="30dp"
                 android:contentDescription="@string/nasa_images"
                 android:visibility="invisible"
                 app:srcCompat="@mipmap/ic_launcher_round" />
+
+            <TextView
+                android:id="@+id/DescValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/progressBar"
+                android:layout_below="@id/imageView"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btnBackToSearch"
@@ -121,13 +95,13 @@
                 android:progress="5" />
         </RelativeLayout>
 
-        <com.google.android.material.navigation.NavigationView
+        <!--<com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/earth_nav_header"
-            app:menu="@menu/earth_drawer" />
+            app:menu="@menu/earth_drawer" />-->
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>
