@@ -19,11 +19,11 @@ public class MainActivity extends AppCompatActivity {
 
         //button that triggers the NASA image of the day activity
         Button btnImage = findViewById(R.id.btnImageOfDay);
-        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, Image_Main.class)));
 
         //button that triggers the Guardians news article search activity
         Button btnGuardian = findViewById(R.id.btnGuardian);
-        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnGuardian.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, Guardian_Main.class)));
 
         //button that triggers the NASA earth image search
         Button btnEarth = findViewById(R.id.btnEarthImage);
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         //button that triggers the BBC news article search
         Button btnBBC = findViewById(R.id.btnBBC);
-        btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        btnBBC.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, BBC_Main.class)));
 
     }
 

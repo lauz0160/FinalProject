@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:headerLayout="@layout/earth_nav_header"
+            app:headerLayout="@layout/image_nav_header"
             app:menu="@menu/earth_drawer" />
 
     </androidx.drawerlayout.widget.DrawerLayout>

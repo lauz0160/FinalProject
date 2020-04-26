@@ -22,7 +22,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="15dp">
+            android:layout_margin="8dp">
 
             <TextView
                 android:id="@+id/imageTitle"
@@ -31,10 +31,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:textAlignment="center"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/DateValue"
+                android:id="@+id/dateValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imageTitle"
@@ -46,25 +46,29 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="260dp"
-                android:layout_below="@id/DateValue"
+                android:layout_height="200dp"
+                android:layout_below="@id/dateValue"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_margin="30dp"
                 android:contentDescription="@string/nasa_images"
                 android:visibility="invisible"
                 app:srcCompat="@mipmap/ic_launcher_round" />
 
-            <TextView
-                android:id="@+id/DescValue"
-                android:layout_width="wrap_content"
+            <ScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/progressBar"
                 android:layout_below="@id/imageView"
+                android:layout_margin="10dp"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
+                android:layout_alignParentEnd="true">
+            <TextView
+                android:id="@+id/descValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:textSize="12sp" />
+                android:isScrollContainer="true"
+                android:textSize="15sp" /></ScrollView>
 
             <Button
                 android:id="@+id/btnBackToSearch"
@@ -95,13 +99,13 @@
                 android:progress="5" />
         </RelativeLayout>
 
-        <!--<com.google.android.material.navigation.NavigationView
+        <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/earth_nav_header"
-            app:menu="@menu/earth_drawer" />-->
+            app:menu="@menu/earth_drawer" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>

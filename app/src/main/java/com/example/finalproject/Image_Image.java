@@ -25,8 +25,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -39,17 +44,19 @@ public class Image_Image extends AppCompatActivity implements NavigationView.OnN
     //global variables relating to image data
     private Bitmap image;
     private String fileName;
-    private String lat;
-    private String lon;
+    private String date;
+    private String title;
+    private String desc;
+    private String url;
 
     private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_earth_image);
+        setContentView(R.layout.activity_image_image);
 
-        prefs = getSharedPreferences("file", Context.MODE_PRIVATE);
+        prefs = getSharedPreferences("imageFile", Context.MODE_PRIVATE);
 
 
         //Sets the toolbar for the activity with the in-activity icons
@@ -72,24 +79,20 @@ public class Image_Image extends AppCompatActivity implements NavigationView.OnN
         progressBar.setProgress(25);
 
         //set the text boxes to variables that can be used
-        TextView latitude = findViewById(R.id.latValue);
-        TextView longitude = findViewById(R.id.longValue);
+        TextView dateDisplay = findViewById(R.id.dateValue);
 
         //get the intent with its data from the previous activity
         Intent fromActivity = getIntent();
         //if the activity was launched using the button for the last search, pull the data from the shared preferences
         if (fromActivity.hasExtra("last")) {
-            lat = prefs.getString("lat", "");
-            lon = prefs.getString("lon", "");
+            date = prefs.getString("date", "");
         }
         //otherwise pull the data from the intent which was the data from the search boxes
         else {
-            lat = fromActivity.getStringExtra("lat");
-            lon = fromActivity.getStringExtra("lon");
+            date = fromActivity.getStringExtra("date");
         }
         //set the text boxes to display the appropriate data
-        latitude.setText(lat);
-        longitude.setText(lon);
+        dateDisplay.setText(date);
 
         //this button finishes this activity and sends the user back to the previous activity
         Button backToSearch = findViewById(R.id.btnBackToSearch);
@@ -99,7 +102,7 @@ public class Image_Image extends AppCompatActivity implements NavigationView.OnN
         Button save = findViewById(R.id.btnSaveFav);
         save.setOnClickListener(btn -> {
             try {
-                fileName = lat + lon + ".png";
+                fileName = date + ".png";
                 FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
                 image.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
                 outputStream.flush();
@@ -109,17 +112,17 @@ public class Image_Image extends AppCompatActivity implements NavigationView.OnN
                     Log.e("Error", e.getMessage());
             }
 
-            startActivity(new Intent(Image_Image.this, Earth_Favorites.class).putExtra("lat", lat).putExtra("lon", lon).putExtra("image", fileName));
+            startActivity(new Intent(Image_Image.this, Image_Favorites.class).putExtra("date", date).putExtra("image", fileName));
         });
         //this send the url to the AsyncTask
-        new GetData().execute("http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/" + lat + "," + lon + "/20?dir=180&ms=500,500&key=AkYKOT4zFh9RFk8QFu4M7wkYSQHRo5HaD1PRiFMo3TVnz7e2sfAGWXa_roMIQXD3");
+        new GetData().execute("https://api.nasa.gov/planetary/apod?api_key=DgPLcIlnmN0Cwrzcg3e9NraFaYLIDI68Ysc6Zh3d&date="+date);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         //when this screen is left, the current values of the latitude and longitude will be saved to shared preferences as the last image searched
-        prefs.edit().putString("lat", lat).putString("lon", lon).commit();
+        prefs.edit().putString("date", date).commit();
     }
 
     @Override
@@ -134,13 +137,13 @@ public class Image_Image extends AppCompatActivity implements NavigationView.OnN
         //launch one of the in-activity pages based on which toolbar button is clicked
         switch (item.getItemId()) {
             case R.id.FavIcon:
-                startActivity(new Intent(Image_Image.this, Earth_Favorites.class));
+                startActivity(new Intent(Image_Image.this, Image_Favorites.class));
                 break;
             case R.id.SearchIcon:
-                startActivity(new Intent(Image_Image.this, Earth_Search.class));
+                startActivity(new Intent(Image_Image.this, Image_Search.class));
                 break;
             case R.id.HomeIcon:
-                startActivity(new Intent(Image_Image.this, Earth_Main.class));
+                startActivity(new Intent(Image_Image.this, Image_Main.class));
                 break;
         }
         return true;
@@ -148,19 +151,19 @@ public class Image_Image extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        //Launch one of the other activites or the help dialog based on the navigation menu buttons is clicked
+        //Launch one of the other activities or the help dialog based on the navigation menu buttons is clicked
         switch (item.getItemId()) {
             case R.id.guardianIcon:
-
+                startActivity(new Intent(Image_Image.this, Guardian_Main.class));
                 break;
             case R.id.nasaImageIcon:
-
+                startActivity(new Intent(Image_Image.this, Image_Main.class));
                 break;
             case R.id.nasaEarthIcon:
                 startActivity(new Intent(Image_Image.this, Earth_Main.class));
                 break;
             case R.id.bbcNewsIcon:
-
+                startActivity(new Intent(Image_Image.this, BBC_Main.class));
                 break;
             case R.id.helpIcon:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -186,8 +189,26 @@ public class Image_Image extends AppCompatActivity implements NavigationView.OnN
             //advance progress bar to 50% while connection is being made to the url
             publishProgress(50);
             try {
+
+                URL Url = new URL(strings[0]);
+                HttpURLConnection Connection = (HttpURLConnection) Url.openConnection();
+                Connection.connect();
+                InputStream Response = Connection.getInputStream();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(Response, "UTF-8"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                String result = sb.toString();
+                JSONObject Report = new JSONObject(result);
+                desc = Report.getString("explanation");
+                title = Report.getString("title");
+                url = Report.getString("hdurl");
+
                 //get a new connection to the url of the image and save the image to the bitmap variable
-                HttpURLConnection imgconnection = (HttpURLConnection) new URL(strings[0]).openConnection();
+                HttpURLConnection imgconnection = (HttpURLConnection) new URL(url).openConnection();
                 imgconnection.connect();
                 int responseCode = imgconnection.getResponseCode();
                 if (responseCode == 200) {
@@ -224,6 +245,10 @@ public class Image_Image extends AppCompatActivity implements NavigationView.OnN
             ImageView pic = findViewById(R.id.imageView);
             pic.setImageBitmap(image);
             pic.setVisibility(View.VISIBLE);
+            TextView titleText = findViewById(R.id.imageTitle);
+            titleText.setText(title);
+            TextView descText = findViewById(R.id.descValue);
+            descText.setText(desc);
 
             super.onPostExecute(s);
         }

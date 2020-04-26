@@ -183,19 +183,19 @@ public class Earth_Favorites extends AppCompatActivity implements NavigationView
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        //Launch one of the other activites or the help dialog based on the navigation menu buttons is clicked
+        //Launch one of the other activities or the help dialog based on the navigation menu buttons is clicked
         switch (item.getItemId()) {
             case R.id.guardianIcon:
-
+                startActivity(new Intent(Earth_Favorites.this, Guardian_Main.class));
                 break;
             case R.id.nasaImageIcon:
-
+                startActivity(new Intent(Earth_Favorites.this, Image_Main.class));
                 break;
             case R.id.nasaEarthIcon:
                 startActivity(new Intent(Earth_Favorites.this, Earth_Main.class));
                 break;
             case R.id.bbcNewsIcon:
-
+                startActivity(new Intent(Earth_Favorites.this, BBC_Main.class));
                 break;
             case R.id.helpIcon:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BBC_Main"/>
+        <activity android:name=".Guardian_Main" />
         <activity android:name=".Earth_Image" />
         <activity android:name=".Earth_Fragment_Frame" />
         <activity android:name=".Earth_Favorites" />
@@ -23,6 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Image_Search" />
+        <activity android:name=".Image_Image" />
+        <activity android:name=".Image_Main" />
+        <activity android:name=".Image_Favorites" />
     </application>
 
 </manifest>

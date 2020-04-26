@@ -24,7 +24,7 @@ public class Image_Search extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_earth_search);
+        setContentView(R.layout.activity_image_search);
 
         //Sets the toolbar for the activity with the in-activity icons
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
@@ -42,22 +42,20 @@ public class Image_Search extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         //Makes the edit text boxes into variables that can be altered
-        EditText lat = findViewById(R.id.editLatitude);
-        EditText lon = findViewById(R.id.editLong);
+        EditText date = findViewById(R.id.editDate);
 
         //Sets the search button to go to the image page with the variables attached to the intent
         Button search = findViewById(R.id.btnSearchDatabase);
         search.setOnClickListener(btn -> {
-            Intent goToImage = new Intent(Image_Search.this, Earth_Image.class);
-            goToImage.putExtra("lat", lat.getText().toString());
-            goToImage.putExtra("lon", lon.getText().toString());
+            Intent goToImage = new Intent(Image_Search.this, Image_Image.class);
+            goToImage.putExtra("date", date.getText().toString());
             startActivity(goToImage);
         });
 
         //Sets the last search button to open up the image page with no variables, just a string saying this intent is from this button
         Button btnLastSearch = findViewById(R.id.btnLastSearch);
         btnLastSearch.setOnClickListener(btn -> {
-            Intent lastImage = new Intent(Image_Search.this, Earth_Image.class);
+            Intent lastImage = new Intent(Image_Search.this, Image_Image.class);
             lastImage.putExtra("last", "yes");
             startActivity(lastImage);
         });
@@ -75,13 +73,13 @@ public class Image_Search extends AppCompatActivity implements NavigationView.On
         //launch one of the in-activity pages based on which toolbar button is clicked
         switch (item.getItemId()) {
             case R.id.FavIcon:
-                startActivity(new Intent(Image_Search.this, Earth_Favorites.class));
+                startActivity(new Intent(Image_Search.this, Image_Favorites.class));
                 break;
             case R.id.SearchIcon:
                 startActivity(new Intent(Image_Search.this, Image_Search.class));
                 break;
             case R.id.HomeIcon:
-                startActivity(new Intent(Image_Search.this, Earth_Main.class));
+                startActivity(new Intent(Image_Search.this, Image_Main.class));
                 break;
         }
         return true;
@@ -89,19 +87,19 @@ public class Image_Search extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        //Launch one of the other activites or the help dialog based on the navigation menu buttons is clicked
+        //Launch one of the other activities or the help dialog based on the navigation menu buttons is clicked
         switch (item.getItemId()) {
             case R.id.guardianIcon:
-
+                startActivity(new Intent(Image_Search.this, Guardian_Main.class));
                 break;
             case R.id.nasaImageIcon:
-
+                startActivity(new Intent(Image_Search.this, Image_Main.class));
                 break;
             case R.id.nasaEarthIcon:
                 startActivity(new Intent(Image_Search.this, Earth_Main.class));
                 break;
             case R.id.bbcNewsIcon:
-
+                startActivity(new Intent(Image_Search.this, BBC_Main.class));
                 break;
             case R.id.helpIcon:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -111,7 +109,6 @@ public class Image_Search extends AppCompatActivity implements NavigationView.On
                         "\n\nThe toolbar along the top of the screen will take you to any of the three main screens of this activity: the home screen, the search screen, and the list of favorites" +
                         "\n\nThe icons in the navigation menu along the side of the screen can take you to any of the other activities in this application");
                 alertDialogBuilder.setPositiveButton("Yes", (click, arg) -> {
-
                 });
                 alertDialogBuilder.create().show();
                 break;

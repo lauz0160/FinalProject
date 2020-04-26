@@ -23,7 +23,7 @@ public class Image_Main extends AppCompatActivity implements NavigationView.OnNa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_earth_main);
+        setContentView(R.layout.activity_image_main);
 
         //Sets the toolbar for the activity with the in-activity icons
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
@@ -42,16 +42,16 @@ public class Image_Main extends AppCompatActivity implements NavigationView.OnNa
 
         //Launches the search page if the user clicks the search button
         Button btnSearch = findViewById(R.id.btnNewSearch);
-        btnSearch.setOnClickListener(btn -> startActivity(new Intent(Image_Main.this, Earth_Search.class)));
+        btnSearch.setOnClickListener(btn -> startActivity(new Intent(Image_Main.this, Image_Search.class)));
 
         //Launches the favorites page if the user clicks on the favorites button
         Button btnFavorites = findViewById(R.id.btnViewFav);
-        btnFavorites.setOnClickListener(btn -> startActivity(new Intent(Image_Main.this, Earth_Favorites.class)));
+        btnFavorites.setOnClickListener(btn -> startActivity(new Intent(Image_Main.this, Image_Favorites.class)));
 
         //Launches the last image search
         Button btnLastSearch = findViewById(R.id.btnLastSearch);
         btnLastSearch.setOnClickListener(btn -> {
-            Intent lastImage = new Intent(Image_Main.this, Earth_Image.class);
+            Intent lastImage = new Intent(Image_Main.this, Image_Image.class);
             lastImage.putExtra("last", "yes");
             startActivity(lastImage);
         });
@@ -69,10 +69,10 @@ public class Image_Main extends AppCompatActivity implements NavigationView.OnNa
         //launch one of the in-activity pages based on which toolbar button is clicked
         switch (item.getItemId()) {
             case R.id.FavIcon:
-                startActivity(new Intent(Image_Main.this, Earth_Favorites.class));
+                startActivity(new Intent(Image_Main.this, Image_Favorites.class));
                 break;
             case R.id.SearchIcon:
-                startActivity(new Intent(Image_Main.this, Earth_Search.class));
+                startActivity(new Intent(Image_Main.this, Image_Search.class));
                 break;
             case R.id.HomeIcon:
                 startActivity(new Intent(Image_Main.this, Image_Main.class));
@@ -83,19 +83,19 @@ public class Image_Main extends AppCompatActivity implements NavigationView.OnNa
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        //Launch one of the other activites or the help dialog based on the navigation menu buttons is clicked
+        //Launch one of the other activities or the help dialog based on the navigation menu buttons is clicked
         switch (item.getItemId()) {
             case R.id.guardianIcon:
-
+                startActivity(new Intent(Image_Main.this, Guardian_Main.class));
                 break;
             case R.id.nasaImageIcon:
-
-                break;
-            case R.id.nasaEarthIcon:
                 startActivity(new Intent(Image_Main.this, Image_Main.class));
                 break;
+            case R.id.nasaEarthIcon:
+                startActivity(new Intent(Image_Main.this, Earth_Main.class));
+                break;
             case R.id.bbcNewsIcon:
-
+                startActivity(new Intent(Image_Main.this, BBC_Main.class));
                 break;
             case R.id.helpIcon:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -106,7 +106,6 @@ public class Image_Main extends AppCompatActivity implements NavigationView.OnNa
                         "\n\nThe toolbar along the top of the screen will take you to any of the three main screens of this activity: the home screen, the search screen, and the list of favorites" +
                         "\n\nThe icons in the navigation menu along the side of the screen can take you to any of the other activities in this application");
                 alertDialogBuilder.setPositiveButton("Yes", (click, arg) -> {
-
                 });
                 alertDialogBuilder.create().show();
                 break;

@@ -83,19 +83,19 @@ public class Earth_Main extends AppCompatActivity implements NavigationView.OnNa
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        //Launch one of the other activites or the help dialog based on the navigation menu buttons is clicked
+        //Launch one of the other activities or the help dialog based on the navigation menu buttons is clicked
         switch (item.getItemId()) {
             case R.id.guardianIcon:
-
+                startActivity(new Intent(Earth_Main.this, Guardian_Main.class));
                 break;
             case R.id.nasaImageIcon:
-
+                startActivity(new Intent(Earth_Main.this, Image_Main.class));
                 break;
             case R.id.nasaEarthIcon:
                 startActivity(new Intent(Earth_Main.this, Earth_Main.class));
                 break;
             case R.id.bbcNewsIcon:
-
+                startActivity(new Intent(Earth_Main.this, BBC_Main.class));
                 break;
             case R.id.helpIcon:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
