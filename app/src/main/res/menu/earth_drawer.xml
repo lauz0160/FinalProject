@@ -4,11 +4,11 @@
 
     <group>
         <item
-            android:id="@+id/guardianIcon"
-            android:icon="@drawable/guardian"
-            android:orderInCategory="100"
-            android:title="@string/guardian_news"
-            app:showAsAction="ifRoom" />
+        android:id="@+id/nasaEarthIcon"
+        android:icon="@drawable/earth"
+        android:orderInCategory="100"
+        android:title="@string/earth_images"
+        app:showAsAction="ifRoom" />
 
         <item
             android:id="@+id/nasaImageIcon"
@@ -18,17 +18,17 @@
             app:showAsAction="ifRoom" />
 
         <item
-            android:id="@+id/nasaEarthIcon"
-            android:icon="@drawable/earth"
+            android:id="@+id/lyricIcon"
+            android:icon="@drawable/lyrics"
             android:orderInCategory="300"
-            android:title="@string/earth_images"
+            android:title="@string/lyrics_search"
             app:showAsAction="ifRoom" />
 
         <item
-            android:id="@+id/bbcNewsIcon"
-            android:icon="@drawable/bbc"
+            android:id="@+id/geoIcon"
+            android:icon="@drawable/geo"
             android:orderInCategory="400"
-            android:title="@string/bbc_news"
+            android:title="@string/geo_city_finder"
             app:showAsAction="always" />
     </group>
 

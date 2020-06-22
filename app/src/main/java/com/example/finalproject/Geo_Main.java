@@ -1,30 +1,29 @@
 package com.example.finalproject;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.widget.Button;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
+        import androidx.appcompat.app.ActionBarDrawerToggle;
+        import androidx.appcompat.app.AlertDialog;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.appcompat.widget.Toolbar;
+        import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.navigation.NavigationView;
+        import com.google.android.material.navigation.NavigationView;
 
 /**
- * Launches the search activity of the nasa image search
- * Displays a screen displaying the search fields for the image and a search button and a button to display the last search done
+ * Launches the main menu of the Earth image search activity
+ * launches a screen with 3 buttons, a toolbar and a navigation menu, different screens will be launches depending on which buttons are clicked
  */
-public class Image_Search extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Geo_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_search);
+        setContentView(R.layout.activity_geo_main);
 
         //Sets the toolbar for the activity with the in-activity icons
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
@@ -41,21 +40,18 @@ public class Image_Search extends AppCompatActivity implements NavigationView.On
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Makes the edit text boxes into variables that can be altered
-        EditText date = findViewById(R.id.editDate);
+        //Launches the search page if the user clicks the search button
+        Button btnSearch = findViewById(R.id.btnNewSearch);
+        btnSearch.setOnClickListener(btn -> startActivity(new Intent(Geo_Main.this, Geo_Main.class)));
 
-        //Sets the search button to go to the image page with the variables attached to the intent
-        Button search = findViewById(R.id.btnSearchDatabase);
-        search.setOnClickListener(btn -> {
-            Intent goToImage = new Intent(Image_Search.this, Image_Image.class);
-            goToImage.putExtra("date", date.getText().toString());
-            startActivity(goToImage);
-        });
+        //Launches the favorites page if the user clicks on the favorites button
+        Button btnFavorites = findViewById(R.id.btnViewFav);
+        btnFavorites.setOnClickListener(btn -> startActivity(new Intent(Geo_Main.this, Geo_Main.class)));
 
-        //Sets the last search button to open up the image page with no variables, just a string saying this intent is from this button
+        //Launches the last image search
         Button btnLastSearch = findViewById(R.id.btnLastSearch);
         btnLastSearch.setOnClickListener(btn -> {
-            Intent lastImage = new Intent(Image_Search.this, Image_Image.class);
+            Intent lastImage = new Intent(Geo_Main.this, Geo_Main.class);
             lastImage.putExtra("last", "yes");
             startActivity(lastImage);
         });
@@ -73,13 +69,13 @@ public class Image_Search extends AppCompatActivity implements NavigationView.On
         //launch one of the in-activity pages based on which toolbar button is clicked
         switch (item.getItemId()) {
             case R.id.FavIcon:
-                startActivity(new Intent(Image_Search.this, Image_Favorites.class));
+                startActivity(new Intent(Geo_Main.this, Geo_Main.class));
                 break;
             case R.id.SearchIcon:
-                startActivity(new Intent(Image_Search.this, Image_Search.class));
+                startActivity(new Intent(Geo_Main.this, Geo_Main.class));
                 break;
             case R.id.HomeIcon:
-                startActivity(new Intent(Image_Search.this, Image_Main.class));
+                startActivity(new Intent(Geo_Main.this, Geo_Main.class));
                 break;
         }
         return true;
@@ -90,22 +86,23 @@ public class Image_Search extends AppCompatActivity implements NavigationView.On
         //Launch one of the other activities or the help dialog based on the navigation menu buttons is clicked
         switch (item.getItemId()) {
             case R.id.lyricIcon:
-                startActivity(new Intent(Image_Search.this, Song_Lyric_Main.class));
+                startActivity(new Intent(Geo_Main.this, Song_Lyric_Main.class));
                 break;
             case R.id.nasaImageIcon:
-                startActivity(new Intent(Image_Search.this, Image_Main.class));
+                startActivity(new Intent(Geo_Main.this, Image_Main.class));
                 break;
             case R.id.nasaEarthIcon:
-                startActivity(new Intent(Image_Search.this, Earth_Main.class));
+                startActivity(new Intent(Geo_Main.this, Earth_Main.class));
                 break;
             case R.id.geoIcon:
-                startActivity(new Intent(Image_Search.this, Geo_Main.class));
+                startActivity(new Intent(Geo_Main.this, Geo_Main.class));
                 break;
             case R.id.helpIcon:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("Search Help");
-                alertDialogBuilder.setMessage("To search for a new image enter the coordinates in the spaces provided then click on the search button" +
-                        "\n\nTo see the last image searched click on the second button" +
+                alertDialogBuilder.setTitle("NASA Image Help");
+                alertDialogBuilder.setMessage("To search for a new image click the first button" +
+                        "\n\nTo see the list of favorites click the last button" +
+                        "\n\nTo see the last image searched click on the last button" +
                         "\n\nThe toolbar along the top of the screen will take you to any of the three main screens of this activity: the home screen, the search screen, and the list of favorites" +
                         "\n\nThe icons in the navigation menu along the side of the screen can take you to any of the other activities in this application");
                 alertDialogBuilder.setPositiveButton("Yes", (click, arg) -> {
@@ -117,4 +114,3 @@ public class Image_Search extends AppCompatActivity implements NavigationView.On
         return false;
     }
 }
-

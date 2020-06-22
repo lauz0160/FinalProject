@@ -150,8 +150,8 @@ public class Earth_Image extends AppCompatActivity implements NavigationView.OnN
     public boolean onNavigationItemSelected(MenuItem item) {
         //Launch one of the other activites or the help dialog based on the navigation menu buttons is clicked
         switch (item.getItemId()) {
-            case R.id.guardianIcon:
-                startActivity(new Intent(Earth_Image.this, Guardian_Main.class));
+            case R.id.lyricIcon:
+                startActivity(new Intent(Earth_Image.this, Song_Lyric_Main.class));
                 break;
             case R.id.nasaImageIcon:
                 startActivity(new Intent(Earth_Image.this, Image_Main.class));
@@ -159,8 +159,8 @@ public class Earth_Image extends AppCompatActivity implements NavigationView.OnN
             case R.id.nasaEarthIcon:
                 startActivity(new Intent(Earth_Image.this, Earth_Main.class));
                 break;
-            case R.id.bbcNewsIcon:
-                startActivity(new Intent(Earth_Image.this, BBC_Main.class));
+            case R.id.geoIcon:
+                startActivity(new Intent(Earth_Image.this, Geo_Main.class));
                 break;
             case R.id.helpIcon:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

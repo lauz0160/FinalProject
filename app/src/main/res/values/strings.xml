@@ -17,21 +17,13 @@
     <string name="search">Search</string>
     <string name="see_last_search">See Last Search</string>
     <string name="cst_2335_final_project">CST 2335 Final Project</string>
-    <string name="dan_brown" translatable="false">Dan Brown</string>
-    <string name="guardian_news_article_search">Guardian News Article Search</string>
-    <string name="dan_dwyer" translatable="false">Dan Dwyer</string>
     <string name="nasa_image_of_the_day">NASA Image of the Day</string>
-    <string name="karen_lauzon" translatable="false">Karen Lauzon</string>
     <string name="nasa_earth_imagery_database">NASA Earth Imagery database</string>
-    <string name="alex_griffith" translatable="false">Alex Griffith</string>
-    <string name="bbc_news_reader">BBC News Reader</string>
     <string name="welcome_to_the_nasa_earth_imagery_database">Welcome to the NASA Earth Imagery Database</string>
     <string name="new_search">New Search</string>
     <string name="view_favorites">View Favorites</string>
-    <string name="guardian_news">Guardian News</string>
     <string name="image_of_day">Image of Day</string>
     <string name="earth_images">Earth Images</string>
-    <string name="bbc_news">BBC News</string>
     <string name="help_message">Confused how this app works?</string>
     <string name="help">Help</string>
     <string name="nasa_earth_image_search">NASA Earth Image Search</string>
@@ -43,4 +35,11 @@
     <string name="return_to_home_screen">Return to home screen</string>
     <string name="nasa_image_search">NASA Image of The Day</string>
     <string name="versionImage" translatable="false">Version 1</string>
+    <string name="lyrics">Song Lyrics Search</string>
+    <string name="geo_earth_search">Geo Earth Search</string>
+    <string name="karen_lauzon">Karen Lauzon</string>
+    <string name="geo_city_finder">Geo City Finder</string>
+    <string name="lyrics_search">Lyrics Search</string>
+    <string name="welcome_to_song_lyric_finder">Welcome to Song Lyric Finder</string>
+    <string name="welcome_to_geo_city_finder">Welcome to Geo City Finder</string>
 </resources>

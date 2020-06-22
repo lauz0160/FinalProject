@@ -185,7 +185,7 @@ public class Image_Favorites extends AppCompatActivity implements NavigationView
     public boolean onNavigationItemSelected(MenuItem item) {
         //Launch one of the other activites or the help dialog based on the navigation menu buttons is clicked
         switch (item.getItemId()) {
-            case R.id.guardianIcon:
+            case R.id.lyricIcon:
 
                 break;
             case R.id.nasaImageIcon:
@@ -194,7 +194,7 @@ public class Image_Favorites extends AppCompatActivity implements NavigationView
             case R.id.nasaEarthIcon:
                 startActivity(new Intent(Image_Favorites.this, Earth_Main.class));
                 break;
-            case R.id.bbcNewsIcon:
+            case R.id.geoIcon:
 
                 break;
             case R.id.helpIcon:

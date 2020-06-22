@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BBC_Main"/>
-        <activity android:name=".Guardian_Main" />
+        <activity android:name=".Geo_Main"/>
+        <activity android:name=".Song_Lyric_Main" />
         <activity android:name=".Earth_Image" />
         <activity android:name=".Earth_Fragment_Frame" />
         <activity android:name=".Earth_Favorites" />

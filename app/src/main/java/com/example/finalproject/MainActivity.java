@@ -22,16 +22,16 @@ public class MainActivity extends AppCompatActivity {
         btnImage.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, Image_Main.class)));
 
         //button that triggers the Guardians news article search activity
-        Button btnGuardian = findViewById(R.id.btnGuardian);
-        btnGuardian.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, Guardian_Main.class)));
+        Button btnGuardian = findViewById(R.id.btnLyricSearch);
+        btnGuardian.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, Song_Lyric_Main.class)));
 
         //button that triggers the NASA earth image search
         Button btnEarth = findViewById(R.id.btnEarthImage);
         btnEarth.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, Earth_Main.class)));
 
         //button that triggers the BBC news article search
-        Button btnBBC = findViewById(R.id.btnBBC);
-        btnBBC.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, BBC_Main.class)));
+        Button btnBBC = findViewById(R.id.btnGeo);
+        btnBBC.setOnClickListener(btn -> startActivity(new Intent(MainActivity.this, Geo_Main.class)));
 
     }
 

@@ -28,70 +28,46 @@
             android:textAlignment="center"
             android:textSize="30sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="bottom"
-            android:text="@string/dan_brown" />
-
         <Button
-            android:id="@+id/btnGuardian"
+            android:id="@+id/btnEarthImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:text="@string/guardian_news_article_search"
+            android:text="@string/nasa_earth_imagery_database"
             android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="bottom"
-            android:text="@string/dan_dwyer" />
 
         <Button
             android:id="@+id/btnImageOfDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:text="@string/nasa_image_of_the_day"
             android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="bottom"
-            android:text="@string/karen_lauzon" />
 
         <Button
-            android:id="@+id/btnEarthImage"
+            android:id="@+id/btnLyricSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:text="@string/nasa_earth_imagery_database"
+            android:text="@string/lyrics"
             android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="bottom"
-            android:text="@string/alex_griffith" />
 
         <Button
-            android:id="@+id/btnBBC"
+            android:id="@+id/btnGeo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="60dp"
             android:layout_weight="1"
-            android:text="@string/bbc_news_reader"
+            android:text="@string/geo_earth_search"
             android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5" />
 
     </LinearLayout>
 </LinearLayout>
